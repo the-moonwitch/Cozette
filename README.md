@@ -1,10 +1,10 @@
 # Cozette
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/slavfox/Cozette?logo=github&style=flat-square)](https://github.com/slavfox/Cozette/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/the-moonwitch/Cozette?logo=github&style=flat-square)](https://github.com/the-moonwitch/Cozette/releases/latest)
 [![AUR version](https://img.shields.io/aur/version/cozette-otb?color=%231793d1&label=AUR&logo=arch-linux&logoColor=%23fff&style=flat-square)](https://aur.archlinux.org/packages/cozette-otb/)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/slavfox/Cozette/Build%20fonts?logo=github&style=flat-square)
-![GitHub All Releases](https://img.shields.io/github/downloads/slavfox/Cozette/total?style=flat-square)
-[![GitHub license](https://img.shields.io/github/license/slavfox/Cozette?style=flat-square)](https://github.com/slavfox/Cozette/blob/master/LICENSE)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/the-moonwitch/Cozette/Build%20fonts?logo=github&style=flat-square)
+![GitHub All Releases](https://img.shields.io/github/downloads/the-moonwitch/Cozette/total?style=flat-square)
+[![GitHub license](https://img.shields.io/github/license/the-moonwitch/Cozette?style=flat-square)](https://github.com/the-moonwitch/Cozette/blob/master/LICENSE)
 
 ![Cozette](./img/sample.png)
 
@@ -188,7 +188,7 @@ explicitly set Cozette(Vector)'s `spacing` to 100, and `scalable` to `true` in `
 
 You can also make Cozette work flawlessly by uninstalling `kitty` and using a terminal emulator for which _not rendering fonts_ isn't a design principle - I cannot recommend [alacritty](https://github.com/alacritty/alacritty/) enough. it's excellent, has worked flawlessly for me for quite some time, and both configuring and getting bitmap fonts to work in it is a breeze.
 
-(The support was discussed in [slavfox/Cozette#18](https://github.com/slavfox/Cozette/issues/18). Many thanks to all the participants there, especially to to Luflosi, who brought up flipping the `allow_bitmapped_fonts` flag in [their fork](https://github.com/Luflosi/kitty/commit/e645e0b5ed084c2c57ecfb8acafc07e76f5717bb), and to [4e554c4c](https://github.com/4e554c4c), who made the AUR package.)
+(The support was discussed in [the-moonwitch/Cozette#18](https://github.com/the-moonwitch/Cozette/issues/18). Many thanks to all the participants there, especially to to Luflosi, who brought up flipping the `allow_bitmapped_fonts` flag in [their fork](https://github.com/Luflosi/kitty/commit/e645e0b5ed084c2c57ecfb8acafc07e76f5717bb), and to [4e554c4c](https://github.com/4e554c4c), who made the AUR package.)
 
 # Roadmap
 
@@ -307,10 +307,10 @@ Cozette's builds use [bdfscale](https://github.com/philj56/bdfscale) by [philj56
 [proggy]: https://github.com/bluescan/proggyfonts
 [creep]: https://github.com/romeovs/creep
 [great coverage of all the glyphs i might encounter in the terminal]: #character-map
-[file an issue]: https://github.com/slavfox/Cozette/issues/new
+[file an issue]: https://github.com/the-moonwitch/Cozette/issues/new
 [nerd fonts]: https://www.nerdfonts.com/
 [the bottom of this readme]: #character-map
-[you can get cozette over at the releases tab]: https://github.com/slavfox/Cozette/releases
+[you can get cozette over at the releases tab]: https://github.com/the-moonwitch/Cozette/releases
 [ifreund]: https://github.com/ifreund
 [an aur package]: https://aur.archlinux.org/packages/cozette-otb/
 [specifically enable bitmap fonts]: https://bugs.launchpad.net/ubuntu/+source/fontconfig/+bug/1560114

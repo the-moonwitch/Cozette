@@ -5,9 +5,326 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning].
 
+## [1.30.0]
+
+IMPORTANT: THE FOUNDRY NAME HAS CHANGED FROM `slavfox` TO `inesw`
+
+The kanji update!
+
+### Added
+
+- ゙ (U+3099 COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK)
+- ゚ (U+309A COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK)
+- 一 (U+4E00 CJK UNIFIED IDEOGRAPH-4E00)
+- 七 (U+4E03 CJK UNIFIED IDEOGRAPH-4E03)
+- 三 (U+4E09 CJK UNIFIED IDEOGRAPH-4E09)
+- 上 (U+4E0A CJK UNIFIED IDEOGRAPH-4E0A)
+- 下 (U+4E0B CJK UNIFIED IDEOGRAPH-4E0B)
+- 九 (U+4E5D CJK UNIFIED IDEOGRAPH-4E5D)
+- 二 (U+4E8C CJK UNIFIED IDEOGRAPH-4E8C)
+- 五 (U+4E94 CJK UNIFIED IDEOGRAPH-4E94)
+- 今 (U+4ECA CJK UNIFIED IDEOGRAPH-4ECA)
+- 休 (U+4F11 CJK UNIFIED IDEOGRAPH-4F11)
+- 何 (U+4F55 CJK UNIFIED IDEOGRAPH-4F55)
+- 先 (U+5148 CJK UNIFIED IDEOGRAPH-5148)
+- 入 (U+5165 CJK UNIFIED IDEOGRAPH-5165)
+- 八 (U+516B CJK UNIFIED IDEOGRAPH-516B)
+- 六 (U+516D CJK UNIFIED IDEOGRAPH-516D)
+- 出 (U+51FA CJK UNIFIED IDEOGRAPH-51FA)
+- 前 (U+524D CJK UNIFIED IDEOGRAPH-524D)
+- 北 (U+5317 CJK UNIFIED IDEOGRAPH-5317)
+- 十 (U+5341 CJK UNIFIED IDEOGRAPH-5341)
+- 午 (U+5348 CJK UNIFIED IDEOGRAPH-5348)
+- 半 (U+534A CJK UNIFIED IDEOGRAPH-534A)
+- 南 (U+5357 CJK UNIFIED IDEOGRAPH-5357)
+- 友 (U+53CB CJK UNIFIED IDEOGRAPH-53CB)
+- 右 (U+53F3 CJK UNIFIED IDEOGRAPH-53F3)
+- 名 (U+540D CJK UNIFIED IDEOGRAPH-540D)
+- 四 (U+56DB CJK UNIFIED IDEOGRAPH-56DB)
+- 国 (U+56FD CJK UNIFIED IDEOGRAPH-56FD)
+- 外 (U+5916 CJK UNIFIED IDEOGRAPH-5916)
+- 天 (U+5929 CJK UNIFIED IDEOGRAPH-5929)
+- 女 (U+5973 CJK UNIFIED IDEOGRAPH-5973)
+- 子 (U+5B50 CJK UNIFIED IDEOGRAPH-5B50)
+- 字 (U+5B57 CJK UNIFIED IDEOGRAPH-5B57)
+- 学 (U+5B66 CJK UNIFIED IDEOGRAPH-5B66)
+- 山 (U+5C71 CJK UNIFIED IDEOGRAPH-5C71)
+- 川 (U+5DDD CJK UNIFIED IDEOGRAPH-5DDD)
+- 左 (U+5DE6 CJK UNIFIED IDEOGRAPH-5DE6)
+- 後 (U+5F8C CJK UNIFIED IDEOGRAPH-5F8C)
+- 書 (U+66F8 CJK UNIFIED IDEOGRAPH-66F8)
+- 本 (U+672C CJK UNIFIED IDEOGRAPH-672C)
+- 来 (U+6765 CJK UNIFIED IDEOGRAPH-6765)
+- 東 (U+6771 CJK UNIFIED IDEOGRAPH-6771)
+- 校 (U+6821 CJK UNIFIED IDEOGRAPH-6821)
+- 母 (U+6BCD CJK UNIFIED IDEOGRAPH-6BCD)
+- 毎 (U+6BCE CJK UNIFIED IDEOGRAPH-6BCE)
+- 気 (U+6C17 CJK UNIFIED IDEOGRAPH-6C17)
+- 漢 (U+6F22 CJK UNIFIED IDEOGRAPH-6F22)
+- 父 (U+7236 CJK UNIFIED IDEOGRAPH-7236)
+- 男 (U+7537 CJK UNIFIED IDEOGRAPH-7537)
+- 白 (U+767D CJK UNIFIED IDEOGRAPH-767D)
+- 聞 (U+805E CJK UNIFIED IDEOGRAPH-805E)
+- 行 (U+884C CJK UNIFIED IDEOGRAPH-884C)
+- 西 (U+897F CJK UNIFIED IDEOGRAPH-897F)
+- 見 (U+898B CJK UNIFIED IDEOGRAPH-898B)
+- 話 (U+8A71 CJK UNIFIED IDEOGRAPH-8A71)
+- 語 (U+8A9E CJK UNIFIED IDEOGRAPH-8A9E)
+- 読 (U+8AAD CJK UNIFIED IDEOGRAPH-8AAD)
+- 車 (U+8ECA CJK UNIFIED IDEOGRAPH-8ECA)
+- 長 (U+9577 CJK UNIFIED IDEOGRAPH-9577)
+- 間 (U+9593 CJK UNIFIED IDEOGRAPH-9593)
+- 雨 (U+96E8 CJK UNIFIED IDEOGRAPH-96E8)
+- 電 (U+96FB CJK UNIFIED IDEOGRAPH-96FB)
+- 食 (U+98DF CJK UNIFIED IDEOGRAPH-98DF)
+- 高 (U+9AD8 CJK UNIFIED IDEOGRAPH-9AD8)
+-  (U+E650)
+-  (U+E65E)
+-  (U+E673)
+-  (U+E67A)
+-  (U+E68B)
+-  (U+E6A7)
+-  (U+E6B2)
+-  (U+EAE8)
+-  (U+F1BC)
+- 󰂺 (U+F00BA)
+- 󰉍 (U+F024D)
+- 󰕙 (U+F0559)
+- 󰗊 (U+F05CA)
+- 󰢬 (U+F08AC)
+- 󰣀 (U+F08C0)
+- 󰷖 (U+F0DD6)
+- 󱆃 (U+F1183)
+- 󱊧 (U+F12A7)
+- 󱍙 (U+F1359)
+
+### Changed
+
+- 々 (U+3005 IDEOGRAPHIC ITERATION MARK)
+- ぅ (U+3045 HIRAGANA LETTER SMALL U)
+- ぇ (U+3047 HIRAGANA LETTER SMALL E)
+- え (U+3048 HIRAGANA LETTER E)
+- か (U+304B HIRAGANA LETTER KA)
+- が (U+304C HIRAGANA LETTER GA)
+- き (U+304D HIRAGANA LETTER KI)
+- ぎ (U+304E HIRAGANA LETTER GI)
+- ぐ (U+3050 HIRAGANA LETTER GU)
+- け (U+3051 HIRAGANA LETTER KE)
+- げ (U+3052 HIRAGANA LETTER GE)
+- こ (U+3053 HIRAGANA LETTER KO)
+- ご (U+3054 HIRAGANA LETTER GO)
+- さ (U+3055 HIRAGANA LETTER SA)
+- ざ (U+3056 HIRAGANA LETTER ZA)
+- し (U+3057 HIRAGANA LETTER SI)
+- じ (U+3058 HIRAGANA LETTER ZI)
+- す (U+3059 HIRAGANA LETTER SU)
+- ず (U+305A HIRAGANA LETTER ZU)
+- せ (U+305B HIRAGANA LETTER SE)
+- ぜ (U+305C HIRAGANA LETTER ZE)
+- そ (U+305D HIRAGANA LETTER SO)
+- ぞ (U+305E HIRAGANA LETTER ZO)
+- た (U+305F HIRAGANA LETTER TA)
+- だ (U+3060 HIRAGANA LETTER DA)
+- ち (U+3061 HIRAGANA LETTER TI)
+- ぢ (U+3062 HIRAGANA LETTER DI)
+- っ (U+3063 HIRAGANA LETTER SMALL TU)
+- つ (U+3064 HIRAGANA LETTER TU)
+- づ (U+3065 HIRAGANA LETTER DU)
+- て (U+3066 HIRAGANA LETTER TE)
+- で (U+3067 HIRAGANA LETTER DE)
+- と (U+3068 HIRAGANA LETTER TO)
+- ど (U+3069 HIRAGANA LETTER DO)
+- な (U+306A HIRAGANA LETTER NA)
+- に (U+306B HIRAGANA LETTER NI)
+- の (U+306E HIRAGANA LETTER NO)
+- は (U+306F HIRAGANA LETTER HA)
+- ば (U+3070 HIRAGANA LETTER BA)
+- ぱ (U+3071 HIRAGANA LETTER PA)
+- ひ (U+3072 HIRAGANA LETTER HI)
+- び (U+3073 HIRAGANA LETTER BI)
+- ぴ (U+3074 HIRAGANA LETTER PI)
+- ふ (U+3075 HIRAGANA LETTER HU)
+- ぶ (U+3076 HIRAGANA LETTER BU)
+- ぷ (U+3077 HIRAGANA LETTER PU)
+- べ (U+3079 HIRAGANA LETTER BE)
+- ぺ (U+307A HIRAGANA LETTER PE)
+- ほ (U+307B HIRAGANA LETTER HO)
+- ぼ (U+307C HIRAGANA LETTER BO)
+- ぽ (U+307D HIRAGANA LETTER PO)
+- ま (U+307E HIRAGANA LETTER MA)
+- み (U+307F HIRAGANA LETTER MI)
+- む (U+3080 HIRAGANA LETTER MU)
+- ゃ (U+3083 HIRAGANA LETTER SMALL YA)
+- や (U+3084 HIRAGANA LETTER YA)
+- ゅ (U+3085 HIRAGANA LETTER SMALL YU)
+- ゆ (U+3086 HIRAGANA LETTER YU)
+- ょ (U+3087 HIRAGANA LETTER SMALL YO)
+- よ (U+3088 HIRAGANA LETTER YO)
+- ら (U+3089 HIRAGANA LETTER RA)
+- り (U+308A HIRAGANA LETTER RI)
+- る (U+308B HIRAGANA LETTER RU)
+- ろ (U+308D HIRAGANA LETTER RO)
+- ん (U+3093 HIRAGANA LETTER N)
+- ゔ (U+3094 HIRAGANA LETTER VU)
+- ゕ (U+3095 HIRAGANA LETTER SMALL KA)
+- ゖ (U+3096 HIRAGANA LETTER SMALL KE)
+- ゞ (U+309E HIRAGANA VOICED ITERATION MARK)
+- ア (U+30A2 KATAKANA LETTER A)
+- ゥ (U+30A5 KATAKANA LETTER SMALL U)
+- ォ (U+30A9 KATAKANA LETTER SMALL O)
+- オ (U+30AA KATAKANA LETTER O)
+- カ (U+30AB KATAKANA LETTER KA)
+- ガ (U+30AC KATAKANA LETTER GA)
+- ギ (U+30AE KATAKANA LETTER GI)
+- ク (U+30AF KATAKANA LETTER KU)
+- グ (U+30B0 KATAKANA LETTER GU)
+- ゲ (U+30B2 KATAKANA LETTER GE)
+- ゴ (U+30B4 KATAKANA LETTER GO)
+- サ (U+30B5 KATAKANA LETTER SA)
+- ザ (U+30B6 KATAKANA LETTER ZA)
+- シ (U+30B7 KATAKANA LETTER SI)
+- ジ (U+30B8 KATAKANA LETTER ZI)
+- ス (U+30B9 KATAKANA LETTER SU)
+- ズ (U+30BA KATAKANA LETTER ZU)
+- ゼ (U+30BC KATAKANA LETTER ZE)
+- ソ (U+30BD KATAKANA LETTER SO)
+- ゾ (U+30BE KATAKANA LETTER ZO)
+- タ (U+30BF KATAKANA LETTER TA)
+- ダ (U+30C0 KATAKANA LETTER DA)
+- チ (U+30C1 KATAKANA LETTER TI)
+- ヂ (U+30C2 KATAKANA LETTER DI)
+- ッ (U+30C3 KATAKANA LETTER SMALL TU)
+- ツ (U+30C4 KATAKANA LETTER TU)
+- ヅ (U+30C5 KATAKANA LETTER DU)
+- テ (U+30C6 KATAKANA LETTER TE)
+- デ (U+30C7 KATAKANA LETTER DE)
+- ド (U+30C9 KATAKANA LETTER DO)
+- ナ (U+30CA KATAKANA LETTER NA)
+- ヌ (U+30CC KATAKANA LETTER NU)
+- ノ (U+30CE KATAKANA LETTER NO)
+- ハ (U+30CF KATAKANA LETTER HA)
+- バ (U+30D0 KATAKANA LETTER BA)
+- パ (U+30D1 KATAKANA LETTER PA)
+- ビ (U+30D3 KATAKANA LETTER BI)
+- ピ (U+30D4 KATAKANA LETTER PI)
+- ブ (U+30D6 KATAKANA LETTER BU)
+- プ (U+30D7 KATAKANA LETTER PU)
+- ヘ (U+30D8 KATAKANA LETTER HE)
+- ベ (U+30D9 KATAKANA LETTER BE)
+- ペ (U+30DA KATAKANA LETTER PE)
+- ボ (U+30DC KATAKANA LETTER BO)
+- ポ (U+30DD KATAKANA LETTER PO)
+- マ (U+30DE KATAKANA LETTER MA)
+- メ (U+30E1 KATAKANA LETTER ME)
+- モ (U+30E2 KATAKANA LETTER MO)
+- ャ (U+30E3 KATAKANA LETTER SMALL YA)
+- ヤ (U+30E4 KATAKANA LETTER YA)
+- ュ (U+30E5 KATAKANA LETTER SMALL YU)
+- ユ (U+30E6 KATAKANA LETTER YU)
+- リ (U+30EA KATAKANA LETTER RI)
+- ル (U+30EB KATAKANA LETTER RU)
+- レ (U+30EC KATAKANA LETTER RE)
+- ロ (U+30ED KATAKANA LETTER RO)
+- ン (U+30F3 KATAKANA LETTER N)
+- ヴ (U+30F4 KATAKANA LETTER VU)
+- ヵ (U+30F5 KATAKANA LETTER SMALL KA)
+- ヷ (U+30F7 KATAKANA LETTER VA)
+- ヸ (U+30F8 KATAKANA LETTER VI)
+- ヹ (U+30F9 KATAKANA LETTER VE)
+- ヺ (U+30FA KATAKANA LETTER VO)
+- ヾ (U+30FE KATAKANA VOICED ITERATION MARK)
+- ㊀ (U+3280 CIRCLED IDEOGRAPH ONE)
+- ㊁ (U+3281 CIRCLED IDEOGRAPH TWO)
+- ㊂ (U+3282 CIRCLED IDEOGRAPH THREE)
+- ㊃ (U+3283 CIRCLED IDEOGRAPH FOUR)
+- ㊄ (U+3284 CIRCLED IDEOGRAPH FIVE)
+- ㊅ (U+3285 CIRCLED IDEOGRAPH SIX)
+- ㊆ (U+3286 CIRCLED IDEOGRAPH SEVEN)
+- ㊇ (U+3287 CIRCLED IDEOGRAPH EIGHT)
+- ㊈ (U+3288 CIRCLED IDEOGRAPH NINE)
+- ㋿ (U+32FF SQUARE ERA NAME REIWA)
+- ㌃ (U+3303 SQUARE AARU)
+- ㌍ (U+330D SQUARE KARORII)
+- ㌔ (U+3314 SQUARE KIRO)
+- ㌘ (U+3318 SQUARE GURAMU)
+- ㌢ (U+3322 SQUARE SENTI)
+- ㌣ (U+3323 SQUARE SENTO)
+- ㌦ (U+3326 SQUARE DORU)
+- ㌧ (U+3327 SQUARE TON)
+- ㌫ (U+332B SQUARE PAASENTO)
+- ㌶ (U+3336 SQUARE HEKUTAARU)
+- ㌻ (U+333B SQUARE PEEZI)
+- ㍉ (U+3349 SQUARE MIRI)
+- ㍊ (U+334A SQUARE MIRIBAARU)
+- ㍍ (U+334D SQUARE MEETORU)
+- ㍑ (U+3351 SQUARE RITTORU)
+- ㍗ (U+3357 SQUARE WATTO)
+- ㍻ (U+337B SQUARE ERA NAME HEISEI)
+- ㍼ (U+337C SQUARE ERA NAME SYOUWA)
+- ㍽ (U+337D SQUARE ERA NAME TAISYOU)
+- ㍾ (U+337E SQUARE ERA NAME MEIZI)
+- 万 (U+4E07 CJK UNIFIED IDEOGRAPH-4E07)
+- 中 (U+4E2D CJK UNIFIED IDEOGRAPH-4E2D)
+- 人 (U+4EBA CJK UNIFIED IDEOGRAPH-4EBA)
+- 仝 (U+4EDD CJK UNIFIED IDEOGRAPH-4EDD)
+- 円 (U+5186 CJK UNIFIED IDEOGRAPH-5186)
+- 分 (U+5206 CJK UNIFIED IDEOGRAPH-5206)
+- 区 (U+533A CJK UNIFIED IDEOGRAPH-533A)
+- 千 (U+5343 CJK UNIFIED IDEOGRAPH-5343)
+- 土 (U+571F CJK UNIFIED IDEOGRAPH-571F)
+- 大 (U+5927 CJK UNIFIED IDEOGRAPH-5927)
+- 小 (U+5C0F CJK UNIFIED IDEOGRAPH-5C0F)
+- 市 (U+5E02 CJK UNIFIED IDEOGRAPH-5E02)
+- 年 (U+5E74 CJK UNIFIED IDEOGRAPH-5E74)
+- 日 (U+65E5 CJK UNIFIED IDEOGRAPH-65E5)
+- 時 (U+6642 CJK UNIFIED IDEOGRAPH-6642)
+- 月 (U+6708 CJK UNIFIED IDEOGRAPH-6708)
+- 木 (U+6728 CJK UNIFIED IDEOGRAPH-6728)
+- 村 (U+6751 CJK UNIFIED IDEOGRAPH-6751)
+- 水 (U+6C34 CJK UNIFIED IDEOGRAPH-6C34)
+- 火 (U+706B CJK UNIFIED IDEOGRAPH-706B)
+- 生 (U+751F CJK UNIFIED IDEOGRAPH-751F)
+- 町 (U+753A CJK UNIFIED IDEOGRAPH-753A)
+- 百 (U+767E CJK UNIFIED IDEOGRAPH-767E)
+- 秒 (U+79D2 CJK UNIFIED IDEOGRAPH-79D2)
+- 金 (U+91D1 CJK UNIFIED IDEOGRAPH-91D1)
+-  (U+F303)
+- ｦ (U+FF66 HALFWIDTH KATAKANA LETTER WO)
+- ｩ (U+FF69 HALFWIDTH KATAKANA LETTER SMALL U)
+- ｬ (U+FF6C HALFWIDTH KATAKANA LETTER SMALL YA)
+- ｭ (U+FF6D HALFWIDTH KATAKANA LETTER SMALL YU)
+- ｯ (U+FF6F HALFWIDTH KATAKANA LETTER SMALL TU)
+- ｳ (U+FF73 HALFWIDTH KATAKANA LETTER U)
+- ｵ (U+FF75 HALFWIDTH KATAKANA LETTER O)
+- ｶ (U+FF76 HALFWIDTH KATAKANA LETTER KA)
+- ｸ (U+FF78 HALFWIDTH KATAKANA LETTER KU)
+- ｻ (U+FF7B HALFWIDTH KATAKANA LETTER SA)
+- ｼ (U+FF7C HALFWIDTH KATAKANA LETTER SI)
+- ｿ (U+FF7F HALFWIDTH KATAKANA LETTER SO)
+- ﾀ (U+FF80 HALFWIDTH KATAKANA LETTER TA)
+- ﾂ (U+FF82 HALFWIDTH KATAKANA LETTER TU)
+- ﾇ (U+FF87 HALFWIDTH KATAKANA LETTER NU)
+- ﾉ (U+FF89 HALFWIDTH KATAKANA LETTER NO)
+- ﾌ (U+FF8C HALFWIDTH KATAKANA LETTER HU)
+- ﾏ (U+FF8F HALFWIDTH KATAKANA LETTER MA)
+- ﾒ (U+FF92 HALFWIDTH KATAKANA LETTER ME)
+- ﾔ (U+FF94 HALFWIDTH KATAKANA LETTER YA)
+- ﾕ (U+FF95 HALFWIDTH KATAKANA LETTER YU)
+- ﾗ (U+FF97 HALFWIDTH KATAKANA LETTER RA)
+- ﾘ (U+FF98 HALFWIDTH KATAKANA LETTER RI)
+- ﾙ (U+FF99 HALFWIDTH KATAKANA LETTER RU)
+- ﾚ (U+FF9A HALFWIDTH KATAKANA LETTER RE)
+- ﾛ (U+FF9B HALFWIDTH KATAKANA LETTER RO)
+- ﾜ (U+FF9C HALFWIDTH KATAKANA LETTER WA)
+- ﾝ (U+FF9D HALFWIDTH KATAKANA LETTER N)
+
+### Removed
+
+- 〿 (U+303F IDEOGRAPHIC HALF FILL SPACE)
+
 ## [1.29.0]
 
-Math brackets, thanks to [@supersurviveur](https://github.com/slavfox/Cozette/pull/165), and TRS-80, Sharp MZ, Amstrad CPC, MSX, DOS/V, and Cascadia compatibility and more arrows, mathematical operators, and symbols thanks to [@PhMajerus](https://github.com/PhMajerus)!
+Math brackets, thanks to [@supersurviveur](https://github.com/the-moonwitch/Cozette/pull/165), and TRS-80, Sharp MZ, Amstrad CPC, MSX, DOS/V, and Cascadia compatibility and more arrows, mathematical operators, and symbols thanks to [@PhMajerus](https://github.com/PhMajerus)!
 
 ### Added
 
@@ -2259,7 +2576,7 @@ All thanks to [@PhMajerus](https://github.com/PhMajerus).
 
 ## [1.26.0]
 
-The 2025 update! Big thanks to [bluetoad07 for fixing the Kana!](https://github.com/slavfox/Cozette/pull/136)
+The 2025 update! Big thanks to [bluetoad07 for fixing the Kana!](https://github.com/the-moonwitch/Cozette/pull/136)
 
 ### Added
 
@@ -3183,7 +3500,7 @@ The APL update
 
 ### Changed
 
-- Fixed [#52](https://github.com/slavfox/Cozette/issues/52) strikethrough
+- Fixed [#52](https://github.com/the-moonwitch/Cozette/issues/52) strikethrough
   rendering bug
 
 ## [1.19.2-hidpi2]
@@ -4947,7 +5264,7 @@ Big thanks to [cpkio](https://github.com/cpkio) for contributing this one!
 
 ### Changed
 
-- [Cyrillic fixes](https://github.com/slavfox/Cozette/issues/5#issuecomment-589734989)
+- [Cyrillic fixes](https://github.com/the-moonwitch/Cozette/issues/5#issuecomment-589734989)
 - Changed font versioning scheme from `M.mmm` where M = major, m = minor to
   `M.mmp` where p=patch. Since font versions are stored as a decimal value
   `x.yyy` with three places past the decimal point, they don't map cleanly
@@ -5286,65 +5603,66 @@ Still broken on Windows.
 
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
-[unreleased]: https://github.com/slavfox/Cozette/compare/v.1.29.0...HEAD
-[1.29.0]: https://github.com/slavfox/Cozette/compare/v.1.28.0...v.1.29.0
-[1.28.0]: https://github.com/slavfox/Cozette/compare/v.1.27.0...v.1.28.0
-[1.27.0]: https://github.com/slavfox/Cozette/compare/v.1.26.0...v.1.27.0
-[1.26.0]: https://github.com/slavfox/Cozette/compare/v.1.25.2...v.1.26.0
-[1.25.2]: https://github.com/slavfox/Cozette/compare/v.1.25.1...v.1.25.2
-[1.25.1]: https://github.com/slavfox/Cozette/compare/v.1.25.0...v.1.25.1
-[1.25.0]: https://github.com/slavfox/Cozette/compare/v.1.24.1...v.1.25.0
-[1.24.1]: https://github.com/slavfox/Cozette/compare/v.1.24.0...v.1.24.1
-[1.24.0]: https://github.com/slavfox/Cozette/compare/v.1.23.2...v.1.24.0
-[1.23.2]: https://github.com/slavfox/Cozette/compare/v.1.23.1...v.1.23.2
-[1.23.1]: https://github.com/slavfox/Cozette/compare/v.1.23.0...v.1.23.1
-[1.23.0]: https://github.com/slavfox/Cozette/compare/v.1.22.2...v.1.23.0
-[1.22.2]: https://github.com/slavfox/Cozette/compare/v.1.22.1...v.1.22.2
-[1.22.1]: https://github.com/slavfox/Cozette/compare/v.1.22.0...v.1.22.1
-[1.22.0]: https://github.com/slavfox/Cozette/compare/v.1.21.0-woff...v.1.22.0
-[1.21.0-woff]: https://github.com/slavfox/Cozette/compare/v.1.21.0...v.1.21.0-woff
-[1.21.0]: https://github.com/slavfox/Cozette/compare/v.1.20.1...v.1.21.0
-[1.20.1]: https://github.com/slavfox/Cozette/compare/v.1.20.0...v.1.20.1
-[1.20.0]: https://github.com/slavfox/Cozette/compare/v.1.19.3...v.1.20.0
-[1.19.3]: https://github.com/slavfox/Cozette/compare/v.1.19.2-hidpi2...v.1.19.3
-[1.19.2-hidpi2]: https://github.com/slavfox/Cozette/compare/v.1.19.2-hidpi...v.1.19.2-hidpi2
-[1.19.2-hidpi]: https://github.com/slavfox/Cozette/compare/v.1.19.2...v.1.19.2-hidpi
-[1.19.2]: https://github.com/slavfox/Cozette/compare/v.1.19.1...v.1.19.2
-[1.19.1]: https://github.com/slavfox/Cozette/compare/v.1.19.0...v.1.19.1
-[1.19.0]: https://github.com/slavfox/Cozette/compare/v.1.18.1...v.1.19.0
-[1.18.1]: https://github.com/slavfox/Cozette/compare/v.1.18.0...v.1.18.1
-[1.18.0]: https://github.com/slavfox/Cozette/compare/v.1.17.2...v.1.18.0
-[1.17.2]: https://github.com/slavfox/Cozette/compare/v.1.17.1...v.1.17.2
-[1.17.1]: https://github.com/slavfox/Cozette/compare/v.1.17.0...v.1.17.1
-[1.17.0]: https://github.com/slavfox/Cozette/compare/v.1.16.0...v.1.17.0
-[1.16.0]: https://github.com/slavfox/Cozette/compare/v.1.15.0...v.1.16.0
-[1.15.0]: https://github.com/slavfox/Cozette/compare/v.1.14.0...v.1.15.0
-[1.14.0]: https://github.com/slavfox/Cozette/compare/v.1.13.0...v.1.14.0
-[1.13.0]: https://github.com/slavfox/Cozette/compare/v.1.12.0...v.1.13.0
-[1.12.0]: https://github.com/slavfox/Cozette/compare/v.1.11.3...v.1.12.0
-[1.11.3]: https://github.com/slavfox/Cozette/compare/v.1.11.2...v.1.11.3
-[1.11.2]: https://github.com/slavfox/Cozette/compare/v.1.11.1...v.1.11.2
-[1.11.1]: https://github.com/slavfox/Cozette/compare/v.1.11.0...v.1.11.1
-[1.11.0]: https://github.com/slavfox/Cozette/compare/v.1.10.0...v.1.11.0
-[1.10.0]: https://github.com/slavfox/Cozette/compare/v.1.9.3...v.1.10.0
-[1.9.3]: https://github.com/slavfox/Cozette/compare/v.1.9.2...v.1.9.3
-[1.9.2]: https://github.com/slavfox/Cozette/compare/v.1.9.0...v.1.9.2
-[1.9.0]: https://github.com/slavfox/Cozette/compare/v.1.8.3...v.1.9.0
-[1.8.3]: https://github.com/slavfox/Cozette/compare/v.1.8.2...v.1.8.3
-[1.8.2]: https://github.com/slavfox/Cozette/compare/v.1.8.1...v.1.8.2
-[1.8.1]: https://github.com/slavfox/Cozette/compare/v.1.8.0...v.1.8.1
-[1.8.0]: https://github.com/slavfox/Cozette/compare/v.1.7.2...v.1.8.0
-[1.7.2]: https://github.com/slavfox/Cozette/compare/v.1.7.1...v.1.7.2
-[1.7.1]: https://github.com/slavfox/Cozette/compare/v.1.7.0...v.1.7.1
-[1.7.0]: https://github.com/slavfox/Cozette/compare/v.1.6.3...v.1.7.0
-[1.6.3]: https://github.com/slavfox/Cozette/compare/v.1.6.2...v.1.6.3
-[1.6.2]: https://github.com/slavfox/Cozette/compare/v.1.6.1...v.1.6.2
-[1.6.1]: https://github.com/slavfox/Cozette/compare/v.1.6.0...v.1.6.1
-[1.6.0]: https://github.com/slavfox/Cozette/compare/v.1.5.1...v.1.6.0
-[1.5.1]: https://github.com/slavfox/Cozette/compare/v.1.5.0...v.1.5.1
-[1.5.0]: https://github.com/slavfox/Cozette/compare/v.1.4.0...v.1.5.0
-[1.4.0]: https://github.com/slavfox/Cozette/compare/v.1.3.0...v.1.4.0
-[1.3.0]: https://github.com/slavfox/Cozette/compare/v.1.2.0...v.1.3.0
-[1.2.0]: https://github.com/slavfox/Cozette/compare/v.1.1.0...v.1.2.0
-[1.1.0]: https://github.com/slavfox/Cozette/compare/v.1.0.0...v.1.1.0
-[1.0.0]: https://github.com/slavfox/Cozette/compare/v.0.1.2...v.1.0.0
+[unreleased]: https://github.com/the-moonwitch/Cozette/compare/v.1.30.0...HEAD
+[1.30.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.29.0...v.1.30.0
+[1.29.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.28.0...v.1.29.0
+[1.28.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.27.0...v.1.28.0
+[1.27.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.26.0...v.1.27.0
+[1.26.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.25.2...v.1.26.0
+[1.25.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.25.1...v.1.25.2
+[1.25.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.25.0...v.1.25.1
+[1.25.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.24.1...v.1.25.0
+[1.24.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.24.0...v.1.24.1
+[1.24.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.23.2...v.1.24.0
+[1.23.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.23.1...v.1.23.2
+[1.23.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.23.0...v.1.23.1
+[1.23.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.22.2...v.1.23.0
+[1.22.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.22.1...v.1.22.2
+[1.22.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.22.0...v.1.22.1
+[1.22.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.21.0-woff...v.1.22.0
+[1.21.0-woff]: https://github.com/the-moonwitch/Cozette/compare/v.1.21.0...v.1.21.0-woff
+[1.21.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.20.1...v.1.21.0
+[1.20.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.20.0...v.1.20.1
+[1.20.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.3...v.1.20.0
+[1.19.3]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.2-hidpi2...v.1.19.3
+[1.19.2-hidpi2]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.2-hidpi...v.1.19.2-hidpi2
+[1.19.2-hidpi]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.2...v.1.19.2-hidpi
+[1.19.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.1...v.1.19.2
+[1.19.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.19.0...v.1.19.1
+[1.19.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.18.1...v.1.19.0
+[1.18.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.18.0...v.1.18.1
+[1.18.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.17.2...v.1.18.0
+[1.17.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.17.1...v.1.17.2
+[1.17.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.17.0...v.1.17.1
+[1.17.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.16.0...v.1.17.0
+[1.16.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.15.0...v.1.16.0
+[1.15.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.14.0...v.1.15.0
+[1.14.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.13.0...v.1.14.0
+[1.13.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.12.0...v.1.13.0
+[1.12.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.11.3...v.1.12.0
+[1.11.3]: https://github.com/the-moonwitch/Cozette/compare/v.1.11.2...v.1.11.3
+[1.11.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.11.1...v.1.11.2
+[1.11.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.11.0...v.1.11.1
+[1.11.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.10.0...v.1.11.0
+[1.10.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.9.3...v.1.10.0
+[1.9.3]: https://github.com/the-moonwitch/Cozette/compare/v.1.9.2...v.1.9.3
+[1.9.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.9.0...v.1.9.2
+[1.9.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.8.3...v.1.9.0
+[1.8.3]: https://github.com/the-moonwitch/Cozette/compare/v.1.8.2...v.1.8.3
+[1.8.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.8.1...v.1.8.2
+[1.8.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.8.0...v.1.8.1
+[1.8.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.7.2...v.1.8.0
+[1.7.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.7.1...v.1.7.2
+[1.7.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.7.0...v.1.7.1
+[1.7.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.6.3...v.1.7.0
+[1.6.3]: https://github.com/the-moonwitch/Cozette/compare/v.1.6.2...v.1.6.3
+[1.6.2]: https://github.com/the-moonwitch/Cozette/compare/v.1.6.1...v.1.6.2
+[1.6.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.6.0...v.1.6.1
+[1.6.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.5.1...v.1.6.0
+[1.5.1]: https://github.com/the-moonwitch/Cozette/compare/v.1.5.0...v.1.5.1
+[1.5.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.4.0...v.1.5.0
+[1.4.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.3.0...v.1.4.0
+[1.3.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.2.0...v.1.3.0
+[1.2.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.1.0...v.1.2.0
+[1.1.0]: https://github.com/the-moonwitch/Cozette/compare/v.1.0.0...v.1.1.0
+[1.0.0]: https://github.com/the-moonwitch/Cozette/compare/v.0.1.2...v.1.0.0
