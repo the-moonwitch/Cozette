@@ -3,7 +3,7 @@ FontName: Cozette
 FullName: Cozette
 FamilyName: Cozette
 Weight: Medium
-Copyright: (c) 2020-2024 Slavfox
+Copyright: (c) 2020-2025 Ines <ines@moonwit.ch>
 Version: 1.252
 ItalicAngle: 0
 UnderlinePosition: -100
@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1735604900
+ModificationTime: 1753860679
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -55,7 +55,7 @@ OS2StrikeYPos: 512
 OS2Vendor: 'UNKN'
 MarkAttachClasses: 1
 DEI: 91125
-LangName: 1033 "" "" "" "" "" "" "" "" "" "" "" "" "" "Copyright (c) 2020 Slavfox <slavfoxman@gmail.com>+AAoACgAA-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the +ACIA-Software+ACIA), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:+AAoACgAA-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.+AAoACgAA-THE SOFTWARE IS PROVIDED +ACIA-AS IS+ACIA, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." "https://opensource.org/licenses/MIT"
+LangName: 1033 "" "" "" "" "" "" "" "" "" "" "" "" "" "Copyright (c) 2020 Ines <ines@moonwit.ch>+AAoACgAA-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the +ACIA-Software+ACIA), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:+AAoACgAA-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.+AAoACgAA-THE SOFTWARE IS PROVIDED +ACIA-AS IS+ACIA, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE." "https://opensource.org/licenses/MIT"
 MATH:ScriptPercentScaleDown: 80
 MATH:ScriptScriptPercentScaleDown: 60
 MATH:DelimitedSubFormulaMinHeight: 3072
@@ -114,17 +114,19 @@ MATH:RadicalKernAfterDegree: -1137
 MATH:RadicalDegreeBottomRaisePercent: 60
 MATH:MinConnectorOverlap: 40
 Encoding: UnicodeFull
+Compacted: 1
 UnicodeInterp: none
 NameList: AGL with PUA
 DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 0 16 12
+WinInfo: 0 16 20
+OnlyBitmaps: 1
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 4
+BeginChars: 1114112 32
 
 StartChar: seven
 Encoding: 55 55 0
@@ -138,29 +140,224 @@ EndChar
 StartChar: uni2077
 Encoding: 8311 8311 1
 Width: 1024
-Flags: HW
+Flags: W
 LayerCount: 2
 EndChar
 
 StartChar: uni2087
 Encoding: 8327 8327 2
 Width: 1024
-Flags: HW
+Flags: W
 LayerCount: 2
 EndChar
 
 StartChar: uniFF17
 Encoding: 65303 65303 3
 Width: 1890
-Flags: HW
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CCF7
+Encoding: 118007 118007 4
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1E0A7
+Encoding: 123047 123047 5
+Width: 2048
+LayerCount: 2
+EndChar
+
+StartChar: u1F0A7
+Encoding: 127143 127143 6
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F0B7
+Encoding: 127159 127159 7
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F0C7
+Encoding: 127175 127175 8
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F0D7
+Encoding: 127191 127191 9
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2150
+Encoding: 8528 8528 10
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: seveneighths
+Encoding: 8542 8542 11
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2466
+Encoding: 9318 9318 12
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2470
+Encoding: 9328 9328 13
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni24FB
+Encoding: 9467 9467 14
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni24F1
+Encoding: 9457 9457 15
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2786
+Encoding: 10118 10118 16
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni277C
+Encoding: 10108 10108 17
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2790
+Encoding: 10128 10128 18
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni3257
+Encoding: 12887 12887 19
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni32B2
+Encoding: 12978 12978 20
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni32BC
+Encoding: 12988 12988 21
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni247A
+Encoding: 9338 9338 22
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2484
+Encoding: 9348 9348 23
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2498
+Encoding: 9368 9368 24
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni248E
+Encoding: 9358 9358 25
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni32C6
+Encoding: 12998 12998 26
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni335F
+Encoding: 13151 13151 27
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni3369
+Encoding: 13161 13161 28
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni33E6
+Encoding: 13286 13286 29
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni33F0
+Encoding: 13296 13296 30
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni33FA
+Encoding: 13306 13306 31
+Width: 1890
+Flags: W
 LayerCount: 2
 EndChar
 EndChars
-BitmapFont: 13 3599 10 3 1
+BitmapFont: 13 33 10 3 1
 BDFStartProperties: 42
-FONT 1 "-slavfox-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
-COMMENT 0 "(c) 2020-2024 Slavfox"
-FOUNDRY 16 "slavfox"
+FONT 1 "-inesw-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
+COMMENT 0 "(c) 2020-2025 Ines <ines@moonwit.ch>"
+FOUNDRY 16 "inesw"
 FAMILY_NAME 16 "Cozette"
 WEIGHT_NAME 16 "Medium"
 SLANT 16 "R"
@@ -177,7 +374,7 @@ CHARSET_ENCODING 16 "1"
 FONTNAME_REGISTRY 16 ""
 FONT_NAME 16 "Cozette"
 FACE_NAME 16 "Cozette"
-COPYRIGHT 16 "(c) 2020-2024 Slavfox"
+COPYRIGHT 16 "(c) 2020-2025 Ines <ines@moonwit.ch>"
 FONT_VERSION 16 "1.252"
 FONT_ASCENT 18 10
 FONT_DESCENT 18 3
@@ -210,5 +407,61 @@ BDFChar: 2 8327 6 1 4 -2 2
 n.=MC5QCca
 BDFChar: 3 65303 12 4 8 0 7
 p]qERGT]7:
+BDFChar: 4 118007 6 0 5 0 7
+r.O]Y6u482
+BDFChar: 5 123047 6 0 0 0 0
+z
+BDFChar: 6 127143 6 1 5 -2 8
+pk\-if\#uOLoC(K
+BDFChar: 7 127159 6 1 5 -2 8
+pk\-if\#ttLtMJ&
+BDFChar: 8 127175 6 1 5 -2 8
+pk\-if\#uOLtMJ&
+BDFChar: 9 127191 6 1 5 -2 8
+pk\-if\#uOW7^kF
+BDFChar: 10 8528 6 1 5 0 8
+Lld^k+BV1%O8o7\
+BDFChar: 11 8542 6 1 5 0 8
+aAC6V0PF:]O8o7\
+BDFChar: 12 9318 12 1 11 -2 8
+*ro]a5X:>PJfp'rKHPpj5X8_m*rl9@
+BDFChar: 13 9328 12 1 11 -2 8
+*ro]a5X:O+Yb72QOW_1W5X8_m*rl9@
+BDFChar: 14 9467 12 1 11 -2 8
+*rpf+@).dFJfp'rKHPpj@).9-*rl9@
+BDFChar: 15 9457 12 2 10 -1 7
+4og'4fRTQDfRVe.NIZKY4obQ_
+BDFChar: 16 10118 12 1 11 -2 8
+*ro]a5X:>PJfp'rKHPpj5X8_m*rl9@
+BDFChar: 17 10108 12 2 10 -1 7
+4og'4j+.#Wj+-lSpOI_n4obQ_
+BDFChar: 18 10128 12 2 10 -1 7
+4og'4j+.#Wj+-lSpOI_n4obQ_
+BDFChar: 19 12887 12 1 11 -2 8
+*ro]a5X;ZKLnKs)Tcglg5X8_m*rl9@
+BDFChar: 20 12978 12 1 11 -2 8
+*ro]a5X;ZKLnKs)M'0&G5X8_m*rl9@
+BDFChar: 21 12988 12 1 11 -2 8
+*ro]a5X:g3W1^bqM'.Wt5X8_m*rl9@
+BDFChar: 22 9338 12 1 11 -2 8
++Fmfa5sU#EKHQ<uKHQ'n83fF*+FjFl
+BDFChar: 23 9348 12 1 11 -2 8
++Fm6Q8O/[dMBIs&MBId!?9gb@+FjFl
+BDFChar: 24 9368 12 1 10 0 7
+:&mT\_>lt(:&mZ^7)7m!
+BDFChar: 25 9358 12 2 9 0 7
+p]qERGT]@@
+BDFChar: 26 12998 12 1 10 -1 7
+o=tu('>PeWo=uP869mq("Mb!;
+BDFChar: 27 13151 12 1 11 -1 8
+!<DZ*&HEK[,!b]a,JZPE6biku
+BDFChar: 28 13161 12 1 11 -1 8
+!.\=i7"E7l8O-QH8\djsks,<C
+BDFChar: 29 13286 12 1 10 0 7
+pV7J.'L4%]oKXZe8&.MX
+BDFChar: 30 13296 12 1 11 0 7
+?/S-o`?7b1>p)]]8`8hU
+BDFChar: 31 13306 12 1 11 0 7
+?/VP%,p4Yp>p)]]M;[V@
 EndBitmapFont
 EndSplineFont

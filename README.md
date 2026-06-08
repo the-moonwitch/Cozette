@@ -1,10 +1,10 @@
 # Cozette
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/slavfox/Cozette?logo=github&style=flat-square)](https://github.com/slavfox/Cozette/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/the-moonwitch/Cozette?logo=github&style=flat-square)](https://github.com/the-moonwitch/Cozette/releases/latest)
 [![AUR version](https://img.shields.io/aur/version/cozette-otb?color=%231793d1&label=AUR&logo=arch-linux&logoColor=%23fff&style=flat-square)](https://aur.archlinux.org/packages/cozette-otb/)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/slavfox/Cozette/Build%20fonts?logo=github&style=flat-square)
-![GitHub All Releases](https://img.shields.io/github/downloads/slavfox/Cozette/total?style=flat-square)
-[![GitHub license](https://img.shields.io/github/license/slavfox/Cozette?style=flat-square)](https://github.com/slavfox/Cozette/blob/master/LICENSE)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/the-moonwitch/Cozette/Build%20fonts?logo=github&style=flat-square)
+![GitHub All Releases](https://img.shields.io/github/downloads/the-moonwitch/Cozette/total?style=flat-square)
+[![GitHub license](https://img.shields.io/github/license/the-moonwitch/Cozette?style=flat-square)](https://github.com/the-moonwitch/Cozette/blob/master/LICENSE)
 
 ![Cozette](./img/sample.png)
 
@@ -156,6 +156,23 @@ will want to use CozetteVector there. In applications that do support bitmap
 fonts, you will want to use the normal, bitmap Cozette (unless it's too
 small for you, in which case, CozetteVector scales better).
 
+#### VSCode Letter Spacing
+
+Sometimes the font might render without proper space betweening the characters (font size set to 13):
+
+![vscode-before-letterspacing](https://github.com/user-attachments/assets/a26eab50-a92e-4a9d-b72f-bbdfcd8b7be7)
+
+To fix this you need to set (in your settings):
+- terminal.integrated.letterSpacing to 1
+
+![vscode-settings-fix-incorrect-letterspacing](https://github.com/user-attachments/assets/1936c07a-f45b-4476-8d49-bd489ff9b9ae)
+
+After that your terminal should look like this (font size set to 13):
+
+![vscode-after-letterspacing](https://github.com/user-attachments/assets/dbd9e722-8503-45cd-aac3-c8fcc9fc2c1e)
+
+_Note: VSCode also provides the option editor.letterSpacing which adjusts the spacing for the file editor._
+
 #### Kitty
 
 **[4e554c4c](https://github.com/4e554c4c) made [an AUR package for `kitty` patched to support bitmap fonts](https://aur.archlinux.org/packages/kitty-bitmap/).**
@@ -171,7 +188,7 @@ explicitly set Cozette(Vector)'s `spacing` to 100, and `scalable` to `true` in `
 
 You can also make Cozette work flawlessly by uninstalling `kitty` and using a terminal emulator for which _not rendering fonts_ isn't a design principle - I cannot recommend [alacritty](https://github.com/alacritty/alacritty/) enough. it's excellent, has worked flawlessly for me for quite some time, and both configuring and getting bitmap fonts to work in it is a breeze.
 
-(The support was discussed in [slavfox/Cozette#18](https://github.com/slavfox/Cozette/issues/18). Many thanks to all the participants there, especially to to Luflosi, who brought up flipping the `allow_bitmapped_fonts` flag in [their fork](https://github.com/Luflosi/kitty/commit/e645e0b5ed084c2c57ecfb8acafc07e76f5717bb), and to [4e554c4c](https://github.com/4e554c4c), who made the AUR package.)
+(The support was discussed in [the-moonwitch/Cozette#18](https://github.com/the-moonwitch/Cozette/issues/18). Many thanks to all the participants there, especially to to Luflosi, who brought up flipping the `allow_bitmapped_fonts` flag in [their fork](https://github.com/Luflosi/kitty/commit/e645e0b5ed084c2c57ecfb8acafc07e76f5717bb), and to [4e554c4c](https://github.com/4e554c4c), who made the AUR package.)
 
 # Roadmap
 
@@ -274,6 +291,14 @@ Cozette includes contributions from:
 - [sungodmoth]
 - [yoshiyoshyosh]
 - [bluetoad07]
+- [PhMajerus]
+- [theridane]
+- [supersurviveur]
+- [breitnw]
+- [kachick]
+- [Eejit43]
+- [WhyNotHugo]
+- [Mogwump]
 - [estradiol enantate]
 
 # License & Acknowledgements
@@ -286,10 +311,10 @@ Cozette's builds use [bdfscale](https://github.com/philj56/bdfscale) by [philj56
 [proggy]: https://github.com/bluescan/proggyfonts
 [creep]: https://github.com/romeovs/creep
 [great coverage of all the glyphs i might encounter in the terminal]: #character-map
-[file an issue]: https://github.com/slavfox/Cozette/issues/new
+[file an issue]: https://github.com/the-moonwitch/Cozette/issues/new
 [nerd fonts]: https://www.nerdfonts.com/
 [the bottom of this readme]: #character-map
-[you can get cozette over at the releases tab]: https://github.com/slavfox/Cozette/releases
+[you can get cozette over at the releases tab]: https://github.com/the-moonwitch/Cozette/releases
 [ifreund]: https://github.com/ifreund
 [an aur package]: https://aur.archlinux.org/packages/cozette-otb/
 [specifically enable bitmap fonts]: https://bugs.launchpad.net/ubuntu/+source/fontconfig/+bug/1560114
@@ -311,7 +336,14 @@ Cozette's builds use [bdfscale](https://github.com/philj56/bdfscale) by [philj56
 [laxul]: https://github.com/laxul
 [sungodmoth]: https://github.com/sungodmoth
 [bluetoad07]: https://github.com/bluetoad07
+[PhMajerus]: https://github.com/PhMajerus
+[theridane]: https://github.com/theridane
+[supersurviveur]: https://github.com/supersurviveur
+[breitnw]: https://github.com/breitnw
+[kachick]: https://github.com/kachick
+[Eejit43]: https://github.com/Eejit43
+[WhyNotHugo]: https://github.com/WhyNotHugo
+[Mogwump]: https://github.com/Mogwump
 [estradiol enantate]: https://en.wikipedia.org/wiki/Estradiol_enantate
 [port]: https://cgit.freebsd.org/ports/tree/x11-fonts/cozette
 [bufferline.nvim]: https://github.com/akinsho/bufferline.nvim
-[tmux]: 

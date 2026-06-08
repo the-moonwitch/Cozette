@@ -55,7 +55,7 @@ def wrap_text(src: str, width=79) -> Sample:
         ):
             idx += len(h)
         else:
-            running_w += 1 if charwidth(src[idx]) != "W" else 2
+            running_w += 1 if charwidth(src[idx]) not in "FW" else 2
             idx += 1
     for idx in reversed(linebreaks):
         src = src[:idx].rstrip() + "\n" + src[idx:].lstrip()
@@ -104,7 +104,7 @@ def save_sample(
             "-fa",
             fnt,
             "-geometry",
-            f"{sample.width}x{sample.height - 1}+100+100",
+            f"{sample.width}x{sample.height}+100+100",
             "-dc",
             "-cu",
             "-cn",
@@ -186,7 +186,7 @@ def make_charlist_text(sfd: Path) -> str:
                 text += f" {chr(c)} "
             else:
                 ch = chr(c)
-                text += ch if charwidth(ch) in "FW" else f"{ch} "
+                text += ch if charwidth(ch) in "FWN" else f"{ch} "
         else:
             print("Skipping", c, category(chr(c)))
     return text
@@ -227,14 +227,15 @@ def save_charlist(fnt: str, sfd: Path, output_dir: Path):
 
     charmap = make_charmap(sfd)
     with (output_dir / "charmap.txt").open("w") as f:
-        f.write("\n".join(charmap))
+        f.write(" ")
+        f.write("\n ".join(charmap))
     files = []
     for chunk in range(0, len(charmap), 50):
         path = output_dir / f"charmap{chunk//50}_tmp.png"
-        text = "\n".join(charmap[chunk : chunk + 50])
+        text = " \n".join(charmap[chunk : chunk + 50])
         save_sample(
             fnt,
-            Sample(text, 40, len(charmap[chunk : chunk + 49])),
+            Sample(text, 41, len(charmap[chunk : chunk + 49])),
             path,
             fgcolor="#24292e",
             bgcolor="#ffffff",

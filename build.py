@@ -106,6 +106,16 @@ def fix_ttf(ttfpath: Path, name: str):
             if line.startswith("Version "):
                 version = line.split()[1]
                 break
+
+    if name.endswith("Bold"):
+        family_name = name.removesuffix("Bold")
+        style_name = "Bold"
+        weight = 700
+    else:
+        family_name = name
+        style_name = "Regular"
+        weight = 400
+
     with NamedTemporaryFile() as sfd:
         subprocess.run(
             [
@@ -128,13 +138,18 @@ def fix_ttf(ttfpath: Path, name: str):
                 "ScaleToEm(2048)",
                 'RenameGlyphs("AGL with PUA")',
                 'Reencode("unicode")',
-                f'SetTTFName(0x409, 3, "{name}")',
+                f'SetTTFName(0x409, 1, "{family_name}")',
+                f'SetTTFName(0x409, 2, "{style_name}")',
+                f'SetTTFName(0x409, 3, "{family_name} {style_name}")',  # Unique font identifier
+                f'SetTTFName(0x409, 4, "{family_name} {style_name}")',  # Full font name
                 f'SetTTFName(0x409, 5, "{version}")',
-                f'SetTTFName(0x409, 8, "Slavfox")',
-                f'SetTTFName(0x409, 9, "Slavfox")',
-                f'SetTTFName(0x409, 11, "https://github.com/slavfox/Cozette")',
+                f'SetTTFName(0x409, 6, "{family_name}-{style_name}")',  # PostScript name
+                f'SetTTFName(0x409, 8, "Ines <ines@moonwit.ch>")',
+                f'SetTTFName(0x409, 9, "Ines <ines@moonwit.ch>")',
+                f'SetTTFName(0x409, 11, "https://github.com/the-moonwitch/Cozette")',
                 f'SetTTFName(0x409, 13, LoadStringFromFile({repr(str((REPO_ROOT / "LICENSE").resolve()))}))',
-                'SetTTFName(0x409, 14, "https://github.com/slavfox/Cozette/blob/master/LICENSE")',
+                'SetTTFName(0x409, 14, "https://github.com/the-moonwitch/Cozette/blob/master/LICENSE")',
+                f'SetOS2Value("Weight", {weight})',
                 f'Generate("{name}.dfont")',
                 f'Generate("{name}.otf")',
                 f'Generate("{name}.ttf")',
