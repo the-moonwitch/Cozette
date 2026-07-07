@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1783391219
+ModificationTime: 1783436993
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -114,14 +114,13 @@ MATH:RadicalKernAfterDegree: -1137
 MATH:RadicalDegreeBottomRaisePercent: 60
 MATH:MinConnectorOverlap: 40
 Encoding: UnicodeFull
-Compacted: 1
 UnicodeInterp: none
 NameList: AGL with PUA
 DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 6400 32 13
+WinInfo: 129280 32 13
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
@@ -13021,11 +13020,9 @@ EndChar
 
 StartChar: uni2603
 Encoding: 9731 9731 1432
-Width: 1024
+Width: 1890
 Flags: W
 LayerCount: 2
-Fore
-Validated: 1
 EndChar
 
 StartChar: uni26B8
@@ -13411,11 +13408,9 @@ EndChar
 
 StartChar: uni2615
 Encoding: 9749 9749 1475
-Width: 1024
+Width: 1890
 Flags: W
 LayerCount: 2
-Fore
-Validated: 1
 EndChar
 
 StartChar: uni2638
@@ -13537,11 +13532,9 @@ EndChar
 
 StartChar: u1F333
 Encoding: 127795 127795 1489
-Width: 945
+Width: 1890
 Flags: W
 LayerCount: 2
-Fore
-Validated: 1
 EndChar
 
 StartChar: u1F439
@@ -13764,11 +13757,9 @@ EndChar
 
 StartChar: uni2B50
 Encoding: 11088 11088 1516
-Width: 1024
+Width: 1890
 Flags: W
 LayerCount: 2
-Fore
-Validated: 1
 EndChar
 
 StartChar: uniE0D4
@@ -57922,7 +57913,7 @@ Flags: W
 LayerCount: 2
 EndChar
 EndChars
-BitmapFont: 13 7164 10 3 1
+BitmapFont: 13 7165 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -59171,11 +59162,11 @@ BDFChar: 599 9583 6 0 3 3 9
 BDFChar: 600 9584 6 3 6 3 9
 J:N0#J:MS=
 BDFChar: 601 9585 6 0 6 -3 9
-!WiK-#RCta+@&2BJ,fQL
+!X&W3#S7OY+<Wp7J,fQL
 BDFChar: 602 9586 6 0 6 -3 9
-J:KmM+<V4$#Qt83!WW3#
+J3Z@B+:o(q#RCP9!WW3#
 BDFChar: 603 9587 6 0 6 -3 9
-Jq?BY-n#WT-q$ITJcGcN
+Jj`!T-kHq$-n%JOJcGcN
 BDFChar: 604 9588 6 0 3 3 3
 n,NFg
 BDFChar: 605 9589 6 3 3 3 9
@@ -60832,8 +60823,8 @@ BDFChar: 1430 1326 6 1 5 -2 7
 E)9A-:f'uU#RCD1
 BDFChar: 1431 1327 6 1 5 -2 5
 E)9A-:m_Lo
-BDFChar: 1432 9731 6 0 6 0 9
-O9AB@W&R156oY/H
+BDFChar: 1432 9731 12 1 11 -2 8
+/jPEs5G/qqOW`OhAAB=<UnAi\T0NAV
 BDFChar: 1433 9912 6 1 5 -3 7
 3+0P;^qa>;+E/G'
 BDFChar: 1434 59191 6 0 5 -1 7
@@ -60918,8 +60909,8 @@ BDFChar: 1473 8675 6 1 5 0 6
 +93MaW)+T:
 BDFChar: 1474 9729 6 1 5 2 4
 0R3?m
-BDFChar: 1475 9749 6 0 6 0 9
-&0N),E3>)rpi$35
+BDFChar: 1475 9749 12 1 11 -1 8
+56-1`?Jn)A5bLBX@=Z*XJ3\U7
 BDFChar: 1476 9784 6 0 6 0 6
 \l?9/\l?6@
 BDFChar: 1477 9881 6 0 6 0 6
@@ -60946,8 +60937,8 @@ BDFChar: 1487 11042 6 1 5 0 6
 +E7,Npi%>U
 BDFChar: 1488 59255 6 0 6 0 6
 TWYM"\>ZJ/
-BDFChar: 1489 127795 6 0 6 -1 8
-I/a-Err.9n-o_2,
+BDFChar: 1489 127795 12 2 10 -2 8
+)utHgIfTM!s+(-"s+#S!'EAgI)uos=
 BDFChar: 1490 128057 12 1 11 -2 8
 EPRGSY+W%m5X8135X:>PKHQ-pJ%u$a
 BDFChar: 1491 128015 12 1 11 -2 7
@@ -61000,8 +60991,8 @@ BDFChar: 1514 9791 6 1 5 -2 7
 Lkp#+Lkp!mE$,,\
 BDFChar: 1515 10062 12 1 10 -1 8
 s1nZMhSANoo>'t5mD.Sos1nZM
-BDFChar: 1516 11088 6 1 5 1 6
-+<^GUE/4Jo
+BDFChar: 1516 11088 12 1 11 -2 8
+"98Q)$31D5n_cYt0n9i9,_.@p0n96(
 BDFChar: 1517 57556 6 1 6 -3 9
 r-UUH$j6P5$lhBWqu?]s
 BDFChar: 1518 57554 6 0 5 -3 9
@@ -61771,12 +61762,12 @@ BDFChar: 1899 9630 6 0 5 -3 9
 BDFChar: 1900 9631 6 0 5 -3 9
 *$-1C*ZQ:$s8W#squ?]s
 BDFChar: 1901 8776 6 1 5 1 5
-5c@MX&-)\1
-BDFChar: 1902 8777 6 1 6 -1 6
-#Y;1!W&.%1
+BWqJMYQ+Y'
+BDFChar: 1902 8777 6 1 5 -1 7
+&.iNZ+D@uE5QCca
 BDFChar: 1903 8960 6 0 5 0 7
 "F/.TUs+(6
-BDFChar: 1904 9192 6 0 5 4 8
+BDFChar: 1904 9192 6 0 5 -2 2
 8CUU<8,rVi
 BDFChar: 1905 10214 6 1 5 -1 7
 pn4:QTV.sNp](9o
