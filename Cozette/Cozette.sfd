@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1783351879
+ModificationTime: 1783391219
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -121,11 +121,11 @@ DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 6272 32 13
+WinInfo: 6400 32 13
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7150
+BeginChars: 1114112 7164
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -57823,8 +57823,106 @@ Width: 1890
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: u1F7E0
+Encoding: 128992 128992 7150
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E1
+Encoding: 128993 128993 7151
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E2
+Encoding: 128994 128994 7152
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E3
+Encoding: 128995 128995 7153
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E4
+Encoding: 128996 128996 7154
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E5
+Encoding: 128997 128997 7155
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E6
+Encoding: 128998 128998 7156
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E7
+Encoding: 128999 128999 7157
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E8
+Encoding: 129000 129000 7158
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7E9
+Encoding: 129001 129001 7159
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7EA
+Encoding: 129002 129002 7160
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1F7EB
+Encoding: 129003 129003 7161
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni26AA
+Encoding: 9898 9898 7162
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni26AB
+Encoding: 9899 9899 7163
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7151 10 3 1
+BitmapFont: 13 7164 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -69630,10 +69728,10 @@ BDFChar: 5878 11038 6 2 4 2 4
 i1T!.
 BDFChar: 5879 9725 12 4 8 1 5
 pkX`^p](9o
-BDFChar: 5880 11035 12 2 10 -1 7
-s+(-"s+(-"s+(-"s+(-"s*t(L
-BDFChar: 5881 11036 12 2 10 -1 7
-s+#WMJ:N0#J:N0#J:N0#s*t(L
+BDFChar: 5880 11035 12 1 11 -2 8
+J&)*Bs5<q8s5<q8s5<q8s5<q8J%u$a
+BDFChar: 5881 11036 12 1 11 -2 8
+J&$RWJ09@bJ09@bJ09@bJ09@bJ%u$a
 BDFChar: 5882 9726 12 4 8 1 5
 q"XXZp](9o
 BDFChar: 5883 11039 6 1 5 1 6
@@ -72170,6 +72268,34 @@ BDFChar: 7148 128763 12 1 11 -2 5
 *WQrU-34)(s5;11c<rAW
 BDFChar: 7149 128764 12 1 11 -2 8
 p]-*MS,e=pMEl\Ws1nZmP$jG<@=S=X
+BDFChar: 7150 128992 12 1 11 -2 8
+*rp2oJ&&[hs5<>'s5:M^J&#s;*rl9@
+BDFChar: 7151 128993 12 1 11 -2 8
+*roie5X:GSJ0;d<J09ss5X8kq*rl9@
+BDFChar: 7152 128994 12 1 11 -2 8
+*rp>s8O0)EP$lBSUnElY8O-h%*rl9@
+BDFChar: 7153 128995 12 1 11 -2 8
+*rp#j;F%%NaWQaSUnGgP;F"d.*rl9@
+BDFChar: 7154 128996 12 1 11 -2 8
+*rp&k<C!RWeR5DMeR5DM<Bt<7*rl9@
+BDFChar: 7155 128997 12 1 11 -2 8
+J&&(WWh?AbWh?AbWh?AbWh?AbJ%u$a
+BDFChar: 7156 128998 12 1 11 -2 8
+J&$RWs58DMs58DMs58DMs58DMJ%u$a
+BDFChar: 7157 128999 12 1 11 -2 8
+J&(L1s5:M^s5<>'s5:M^s5<>'J%u$a
+BDFChar: 7158 129000 12 1 11 -2 8
+J&%0hJ0;d<J09ssJ0;d<J09ssJ%u$a
+BDFChar: 7159 129001 12 1 11 -2 8
+J&'/KUnElYaWRCPP$lBSUnElYJ%u$a
+BDFChar: 7160 129002 12 1 11 -2 8
+J&%4TUnGgPP$k)YaWQaSUnGgPJ%u$a
+BDFChar: 7161 129003 12 1 11 -2 8
+J&&(WeR5DMeR5DMeR5DMeR5DMJ%u$a
+BDFChar: 7162 9898 12 1 11 -2 8
+*ro]a5X9iBJ09@bJ09@b5X8_m*rl9@
+BDFChar: 7163 9899 12 1 11 -2 8
+*rpf+J&)*Bs5<q8s5<q8J&$QL*rl9@
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
