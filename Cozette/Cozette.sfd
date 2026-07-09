@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1783574346
+ModificationTime: 1783575466
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -120,11 +120,11 @@ DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 9664 16 9
+WinInfo: 9904 16 9
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7501
+BeginChars: 1114112 7502
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -60257,8 +60257,15 @@ Width: 1890
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: uni26FA
+Encoding: 9978 9978 7501
+Width: 1890
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7502 10 3 1
+BitmapFont: 13 7503 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -64183,7 +64190,7 @@ bfiUKGVCfO
 BDFChar: 1938 62562 6 0 5 0 7
 <)ds=<7G/P
 BDFChar: 1939 9203 12 3 9 -2 8
-rdob$HoP)kP.LVm
+rdob$HoP)gP.LVm
 BDFChar: 1940 774 6 2 4 7 8
 T\oeM
 BDFChar: 1941 771 6 1 5 7 8
@@ -75306,6 +75313,8 @@ BDFChar: 7499 10175 12 1 11 0 6
 hd@RW;*^!]MBId!EPMPS
 BDFChar: 7500 9757 12 1 10 -2 9
 !.Y)8!C-ZNImC2&W5.7TJO"`N5_)'!
+BDFChar: 7501 9978 12 1 11 -2 8
+!<<3%"+WVo.)76]<'XDJOs#o1s53kW
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
