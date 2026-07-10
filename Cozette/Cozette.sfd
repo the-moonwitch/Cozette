@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1783636302
+ModificationTime: 1783647274
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -120,11 +120,11 @@ DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 129504 16 9
+WinInfo: 118320 16 9
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7668
+BeginChars: 1114112 7677
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -61426,8 +61426,71 @@ Width: 1890
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: u1CEBB
+Encoding: 118459 118459 7668
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CEBE
+Encoding: 118462 118462 7669
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CEBF
+Encoding: 118463 118463 7670
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CEBD
+Encoding: 118461 118461 7671
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CEBA
+Encoding: 118458 118458 7672
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CEBC
+Encoding: 118460 118460 7673
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CCFA
+Encoding: 118010 118010 7674
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CCFB
+Encoding: 118011 118011 7675
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: u1CCFC
+Encoding: 118012 118012 7676
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7668 10 3 1
+BitmapFont: 13 7677 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -76809,6 +76872,24 @@ BDFChar: 7666 129621 12 1 11 -2 8
 ++PJ!80C5A8g$\JnA%:S?[ts<J)C;,
 BDFChar: 7667 129623 12 1 11 -2 8
 ++QSkGMmo-Fl7H$cQI_QIt2K'J)C;,
+BDFChar: 7668 118459 6 1 5 0 7
+pk[RYfSHL$
+BDFChar: 7669 118462 6 1 5 0 6
+#S8+dnF0fc
+BDFChar: 7670 118463 6 1 5 0 6
+;#%!aW,NjZ
+BDFChar: 7671 118461 6 1 5 0 6
+&0TX#q"RYc
+BDFChar: 7672 118458 6 1 5 0 6
+pkX`F+<^FZ
+BDFChar: 7673 118460 6 0 6 0 7
+3.1`)<&bF#
+BDFChar: 7674 118010 6 0 7 0 6
+^rTJS<)k+B
+BDFChar: 7675 118011 6 1 5 1 5
++Ahk.:]LIq
+BDFChar: 7676 118012 6 1 5 0 6
++Abm2LtEgM
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
