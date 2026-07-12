@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1783800321
+ModificationTime: 1783871115
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -120,11 +120,11 @@ DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 129520 16 9
+WinInfo: 65008 16 9
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7821
+BeginChars: 1114112 7837
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -57982,7 +57982,7 @@ EndChar
 StartChar: u1F90C
 Encoding: 129292 129292 7176
 Width: 1890
-Flags: W
+Flags: HW
 LayerCount: 2
 EndChar
 
@@ -62493,8 +62493,120 @@ Width: 1890
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: uniFE00
+Encoding: 65024 65024 7821
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE01
+Encoding: 65025 65025 7822
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE02
+Encoding: 65026 65026 7823
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE03
+Encoding: 65027 65027 7824
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE04
+Encoding: 65028 65028 7825
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE05
+Encoding: 65029 65029 7826
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE06
+Encoding: 65030 65030 7827
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE07
+Encoding: 65031 65031 7828
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE08
+Encoding: 65032 65032 7829
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE09
+Encoding: 65033 65033 7830
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0A
+Encoding: 65034 65034 7831
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0B
+Encoding: 65035 65035 7832
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0C
+Encoding: 65036 65036 7833
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0D
+Encoding: 65037 65037 7834
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0E
+Encoding: 65038 65038 7835
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniFE0F
+Encoding: 65039 65039 7836
+Width: 0
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7821 10 3 1
+BitmapFont: 13 7839 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -78182,6 +78294,42 @@ BDFChar: 7819 129644 12 1 11 -2 8
 *rpf+7DS74gL,_CdU9tcGX-bo*rl9@
 BDFChar: 7820 129645 12 1 11 -2 8
 *rpf+HbdF)mblW'qr#7tHbb!D*rl9@
+BDFChar: 7821 65024 0 0 0 0 0
+z
+BDFChar: 7822 65025 0 0 0 0 0
+z
+BDFChar: 7823 65026 0 0 0 0 0
+z
+BDFChar: 7824 65027 0 0 0 0 0
+z
+BDFChar: 7825 65028 0 0 0 0 0
+z
+BDFChar: 7826 65029 0 0 0 0 0
+z
+BDFChar: 7827 65030 0 0 0 0 0
+z
+BDFChar: 7828 65031 0 0 0 0 0
+z
+BDFChar: 7829 65032 0 0 0 0 0
+z
+BDFChar: 7830 65033 0 0 0 0 0
+z
+BDFChar: 7831 65034 0 0 0 0 0
+z
+BDFChar: 7832 65035 0 0 0 0 0
+z
+BDFChar: 7833 65036 0 0 0 0 0
+z
+BDFChar: 7834 65037 0 0 0 0 0
+z
+BDFChar: 7835 65038 0 0 0 0 0
+z
+BDFChar: 7836 65039 0 0 0 0 0
+z
+BDFChar: -1 128791 0 0 0 0 0
+z
+BDFChar: -1 128781 0 0 0 0 0
+z
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
