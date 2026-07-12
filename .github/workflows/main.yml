@@ -26,8 +26,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build fonts
         run: |
-          pipenv --python /bin/python install
-          pipenv run python build.py fonts
+          pip install --break-system-packages fonttools Pillow crayons gitpython setuptools
+          python build.py fonts
       - name: Save version
         id: version
         run: |
