@@ -114,13 +114,14 @@ MATH:RadicalKernAfterDegree: -1137
 MATH:RadicalDegreeBottomRaisePercent: 60
 MATH:MinConnectorOverlap: 40
 Encoding: UnicodeFull
+Compacted: 1
 UnicodeInterp: none
 NameList: AGL with PUA
 DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 65008 16 9
+WinInfo: 6214 26 15
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
@@ -62606,7 +62607,7 @@ Flags: W
 LayerCount: 2
 EndChar
 EndChars
-BitmapFont: 13 7839 10 3 1
+BitmapFont: 13 7838 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -68868,8 +68869,8 @@ BDFChar: 3106 128300 12 1 11 -2 8
 !.Y/:"Fpi0&HEc#S\RP,-\26Ts53kW
 BDFChar: 3107 128233 12 1 11 -2 8
 %KHh9)Z]Edb$_$<OW^,9UnGM2s53kW
-BDFChar: 3108 128196 12 2 9 -1 8
-r/-?7J\?WJJc>]M
+BDFChar: 3108 128196 12 2 10 -2 8
+rW%WP["*p^\:B*[^4:`a]RYN_s*t(L
 BDFChar: 3109 128044 12 1 11 -2 8
 *oK9@2o,I/s54FGA`.Xf5JVaK?iU0,
 BDFChar: 3110 128169 12 1 11 -2 8
@@ -75223,7 +75224,7 @@ BDFChar: 6283 127971 12 1 11 -2 8
 BDFChar: 6284 127972 12 1 11 -2 8
 5CbtK+Frh:lJSb:W1]fVY+Vqjs53kW
 BDFChar: 6285 127973 12 1 11 -2 8
-rW%T/WZ\mGWZZndW$$V`\0/:(s53kW
+rW%T/Os%?/Os#@LW$$V`\0/:(s53kW
 BDFChar: 6286 127974 12 1 11 -2 8
 %KJ_Dn_d80s59QCY+VqjY+Vqjs53kW
 BDFChar: 6287 127975 12 1 11 -2 8
@@ -75864,8 +75865,8 @@ BDFChar: 6604 127934 12 1 11 -2 8
 A&+@;R\4e2)P@g1)LsI@Dueer^]4?7
 BDFChar: 6605 127935 12 1 11 -2 8
 "99>?+oi2T#lkOp+lF_uScJNc?iU0,
-BDFChar: 6606 127937 12 0 11 0 7
-s7#/ik&?`MR?6QMk&C@i
+BDFChar: 6606 127937 12 1 11 -2 8
+n6k_ClX62)Pb@C$lX9Tta+1r*^]4?7
 BDFChar: 6607 127938 12 1 11 -2 8
 9E5NP*[%)*/cZEt+!>kPOhctWDu]k<
 BDFChar: 6608 127939 12 1 11 -2 8
@@ -78325,10 +78326,6 @@ z
 BDFChar: 7835 65038 0 0 0 0 0
 z
 BDFChar: 7836 65039 0 0 0 0 0
-z
-BDFChar: -1 128791 0 0 0 0 0
-z
-BDFChar: -1 128781 0 0 0 0 0
 z
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
