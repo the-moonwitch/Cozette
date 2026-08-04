@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1785796959
+ModificationTime: 1785847023
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -120,11 +120,11 @@ DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 7410 26 15
+WinInfo: 7332 26 15
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7853
+BeginChars: 1114112 7874
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -26334,7 +26334,7 @@ EndChar
 StartChar: uni1D25
 Encoding: 7461 7461 2920
 Width: 1024
-Flags: HW
+Flags: W
 LayerCount: 2
 Fore
 Validated: 1
@@ -62717,8 +62717,155 @@ Width: 1024
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: uni1D01
+Encoding: 7425 7425 7853
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D02
+Encoding: 7426 7426 7854
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D03
+Encoding: 7427 7427 7855
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D06
+Encoding: 7430 7430 7856
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D08
+Encoding: 7432 7432 7857
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D09
+Encoding: 7433 7433 7858
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D0C
+Encoding: 7436 7436 7859
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D0E
+Encoding: 7438 7438 7860
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D10
+Encoding: 7440 7440 7861
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D14
+Encoding: 7444 7444 7862
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D16
+Encoding: 7446 7446 7863
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D17
+Encoding: 7447 7447 7864
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D19
+Encoding: 7449 7449 7865
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D1A
+Encoding: 7450 7450 7866
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D23
+Encoding: 7459 7459 7867
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D24
+Encoding: 7460 7460 7868
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D15
+Encoding: 7445 7445 7869
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni0222
+Encoding: 546 546 7870
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni0223
+Encoding: 547 547 7871
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni2C7B
+Encoding: 11387 11387 7872
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uni1D7B
+Encoding: 7547 7547 7873
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7853 10 3 1
+BitmapFont: 13 7875 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -78470,6 +78617,50 @@ BDFChar: 7851 7457 6 1 5 0 5
 Lkr".:f%,l
 BDFChar: 7852 7458 6 1 5 0 5
 p^eQ5JG9*E
+BDFChar: 7853 7425 6 1 5 0 5
+GbDS)TXXt%
+BDFChar: 7854 7426 6 1 5 0 5
+E2Y2KW)*Ho
+BDFChar: 7855 7427 6 1 5 0 5
+E(KIh88nP/
+BDFChar: 7856 7430 6 1 5 0 5
+E(K1`88nP/
+BDFChar: 7857 7432 6 1 5 0 5
+E/4cRLi<=o
+BDFChar: 7858 7433 6 1 4 -2 5
+^`XaB+><d<
+BDFChar: 7859 7436 6 1 5 0 5
+5YtiR^j#hZ
+BDFChar: 7860 7438 6 1 5 0 5
+LmY-^Lkl$2
+BDFChar: 7861 7440 6 1 5 0 5
+E/4c*Li<=o
+BDFChar: 7862 7444 6 1 5 0 5
+:oGf+W)*Ho
+BDFChar: 7863 7446 6 1 5 3 5
+E/9;M
+BDFChar: 7864 7447 6 1 5 0 2
+Lkp!M
+BDFChar: 7865 7449 6 1 5 0 5
+G_gT8Lkl$2
+BDFChar: 7866 7450 6 1 5 0 5
+LknTHLj/n"
+BDFChar: 7867 7459 6 1 5 0 5
+p^hBMLi<=o
+BDFChar: 7868 7460 6 1 5 0 5
+E/62ULi<=o
+BDFChar: 7869 7445 6 1 5 0 5
+Lkp#+Li<=o
+BDFChar: 7870 546 6 1 5 0 7
+Lkpk+Lkpk+
+BDFChar: 7871 547 6 1 5 0 8
+Lkpk+LkpkCDu]k<
+BDFChar: 7872 11387 6 1 5 0 5
+p]q.M#l"B"
+BDFChar: 7873 7547 6 2 4 0 5
+i'?3c5i;VB
+BDFChar: -1 7548 6 0 0 0 0
+z
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
