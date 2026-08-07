@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1786053098
+ModificationTime: 1786063584
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -114,13 +114,14 @@ MATH:RadicalKernAfterDegree: -1137
 MATH:RadicalDegreeBottomRaisePercent: 60
 MATH:MinConnectorOverlap: 40
 Encoding: UnicodeFull
+Compacted: 1
 UnicodeInterp: none
 NameList: AGL with PUA
 DisplaySize: 13
 AntiAlias: 1
 FitToEm: 0
 WidthSeparation: 307
-WinInfo: 38686 46 16
+WinInfo: 3864 56 16
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
@@ -62870,6 +62871,8 @@ Encoding: 30000 30000 7874
 Width: 1890
 Flags: HW
 LayerCount: 2
+Fore
+Refer: 7877 21475 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uni76EE
@@ -62989,13 +62992,17 @@ Encoding: 29356 29356 7891
 Width: 1890
 Flags: HW
 LayerCount: 2
+Fore
+Refer: 3667 22823 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uni7389
 Encoding: 29577 29577 7892
-Width: 1890
+Width: 923
 Flags: HW
 LayerCount: 2
+Fore
+Refer: 6133 29579 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uni7AF9
@@ -63033,7 +63040,7 @@ Flags: HW
 LayerCount: 2
 EndChar
 EndChars
-BitmapFont: 13 7898 10 3 1
+BitmapFont: 13 7899 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -78827,54 +78834,54 @@ BDFChar: 7872 11387 6 1 5 0 5
 p]q.M#l"B"
 BDFChar: 7873 7547 6 2 4 0 5
 i'?3c5i;VB
-BDFChar: 7874 30000 12 11 11 -1 -1
-z
-BDFChar: 7875 30446 12 11 11 -1 -1
-z
-BDFChar: 7876 32819 12 11 11 -1 -1
-z
-BDFChar: 7877 21475 12 11 11 -1 -1
-z
-BDFChar: 7878 25163 12 11 11 -1 -1
-z
-BDFChar: 7879 36275 12 11 11 -1 -1
-z
-BDFChar: 7880 21147 12 11 11 -1 -1
-z
-BDFChar: 7881 31435 12 11 11 -1 -1
-z
-BDFChar: 7882 38899 12 11 11 -1 -1
-z
-BDFChar: 7883 30707 12 11 11 -1 -1
-z
-BDFChar: 7884 31354 12 11 11 -1 -1
-z
-BDFChar: 7885 26089 12 11 11 -1 -1
-z
-BDFChar: 7886 33457 12 11 11 -1 -1
-z
-BDFChar: 7887 35997 12 11 11 -1 -1
-z
-BDFChar: 7888 31992 12 11 11 -1 -1
-z
-BDFChar: 7889 34411 12 11 11 -1 -1
-z
-BDFChar: 7890 22805 12 11 11 -1 -1
-z
-BDFChar: 7891 29356 12 11 11 -1 -1
-z
-BDFChar: 7892 29577 12 11 11 -1 -1
-z
-BDFChar: 7893 31481 12 11 11 -1 -1
-z
-BDFChar: 7894 26862 12 11 11 -1 -1
-z
-BDFChar: 7895 26519 12 11 11 -1 -1
-z
-BDFChar: 7896 36196 12 11 11 -1 -1
-z
-BDFChar: 7897 38738 12 11 11 -1 -1
-z
+BDFChar: 7874 30000 12 3 9 1 7
+&.fEP&.fBQ
+BDFChar: 7875 30446 12 2 9 -1 9
+s+,b$JUrCPJV!h$
+BDFChar: 7876 32819 12 1 11 -1 9
+s55#M+Fl\,+FkSb5Cal,,N/KM!.Y%L
+BDFChar: 7877 21475 12 2 10 -1 7
+s+#WMJ:N0#J:N0#J:RZMJ:IV"
+BDFChar: 7878 25163 12 1 11 -1 9
+!rtF`"9<qe"98Q)s54"["98Q)(]XO9
+BDFChar: 7879 36275 12 1 11 -1 9
+5Cal,+FkSb5C`k:"99eL,QM'LKAZ_0
+BDFChar: 7880 21147 12 2 10 -1 9
+#QP,1#QXmT#_322&:b=B+Fl_-LB%;S
+BDFChar: 7881 31435 12 1 11 -1 9
+"98Q)J%u$a+FkSb+TN)S&HDk4s53kW
+BDFChar: 7882 38899 12 1 11 -1 9
+"9<qe+Fk%(s53kW5Cal,5Cal,5C`_6
+BDFChar: 7883 30707 12 1 11 -1 9
+s54._#QPD9+2BQq:dC+-&3q>Q&3p3q
+BDFChar: 7884 31354 12 2 10 -1 9
+#QXmTP^o!K,lgC7!!%KK#QP,1s*t(L
+BDFChar: 7885 26089 12 1 11 -1 9
+J&"<7J&"<7J%u0e"9AJ["98Q)"98E%
+BDFChar: 7886 33457 12 1 11 -1 9
+&HMjh&HE.<&ca+@@t:9R+oif0+i"'X
+BDFChar: 7887 35997 12 1 11 -1 9
+5Cal,5Cal,+Fl\,+Fl\,&HEr(^gI-B
+BDFChar: 7888 31992 12 1 11 -1 9
+"98]-0`Vgd$ihu3J%u1P'`]M0`*`QF
+BDFChar: 7889 34411 12 1 11 -1 9
+"98Q)J&"H;6pO.*J%u0e"@*4Mp`KP:
+BDFChar: 7890 22805 12 1 10 -1 9
+"98Q)&&8`A0S%5p"TST("998=?iU0,
+BDFChar: 7891 29356 12 8 10 7 8
+^`WUW
+BDFChar: 7892 29577 12 8 9 1 2
+J3X)7
+BDFChar: 7893 31481 12 1 11 0 9
+63'=PJ)HQAP^j<q&:b=B&:bDo
+BDFChar: 7894 26862 12 1 11 -1 9
+"9<qe%KI4DjPU.@+TV8p,Cjo%W?;0@
+BDFChar: 7895 26519 12 1 11 -1 9
++TNYc+TV8p+TO<KCOft]W?<>a+TMKB
+BDFChar: 7896 36196 12 1 11 -1 9
+"98Q)5C`k:J%u?j8O,iiOWY59+ohTC
+BDFChar: 7897 38738 12 1 11 -1 9
+"9<qe"9:Z:"9AJ[!!")@*rllQ&c_n3
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
@@ -78942,5 +78949,8 @@ BDFRefChar: 3667 3661 0 0 N
 BDFRefChar: 3677 3661 0 0 N
 BDFRefChar: 5990 5986 0 0 N
 BDFRefChar: 6035 3661 0 0 N
+BDFRefChar: 7874 7877 0 0 N
+BDFRefChar: 7891 3667 0 0 N
+BDFRefChar: 7892 6133 0 0 N
 EndBitmapFont
 EndSplineFont
