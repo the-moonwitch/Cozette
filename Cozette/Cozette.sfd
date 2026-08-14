@@ -22,7 +22,7 @@ OS2Version: 1
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 0
 CreationTime: -2082812035
-ModificationTime: 1785847023
+ModificationTime: 1786724266
 PfmFamily: 49
 TTFWeight: 500
 TTFWidth: 5
@@ -124,7 +124,7 @@ WinInfo: 7332 26 15
 BeginPrivate: 0
 EndPrivate
 TeXData: 1 0 0 524288 262144 174762 0 -1048576 174762 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 1114112 7874
+BeginChars: 1114112 7882
 
 StartChar: uni0000
 Encoding: 0 0 0
@@ -62864,8 +62864,64 @@ Width: 1024
 Flags: W
 LayerCount: 2
 EndChar
+
+StartChar: uF086F
+Encoding: 985199 985199 7874
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uF107B
+Encoding: 987259 987259 7875
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uF0C82
+Encoding: 986242 986242 7876
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniF0AD
+Encoding: 61613 61613 7877
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uniEB9C
+Encoding: 60316 60316 7878
+Width: 945
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uF0A16
+Encoding: 985622 985622 7879
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uF19FC
+Encoding: 989692 989692 7880
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
+
+StartChar: uF0565
+Encoding: 984421 984421 7881
+Width: 1024
+Flags: W
+LayerCount: 2
+EndChar
 EndChars
-BitmapFont: 13 7875 10 3 1
+BitmapFont: 13 7883 10 3 1
 BDFStartProperties: 42
 FONT 1 "-samhain-Cozette-Medium-R-Normal--13-120-75-75-M-60-ISO10646-1"
 COMMENT 0 "(c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors <https://github.com/the-moonwitch/Cozette/contributors>"
@@ -78659,6 +78715,22 @@ BDFChar: 7872 11387 6 1 5 0 5
 p]q.M#l"B"
 BDFChar: 7873 7547 6 2 4 0 5
 i'?3c5i;VB
+BDFChar: 7874 985199 6 0 5 0 7
+n;+HqP_>;!
+BDFChar: 7875 987259 6 0 7 -2 7
+nEAs2^t$`b%M\sD
+BDFChar: 7876 986242 6 1 5 1 5
+i0a:qp](9o
+BDFChar: 7877 61613 6 0 7 0 7
+$lBQi5&d11
+BDFChar: 7878 60316 6 0 6 1 6
+W2QMfU7qVf
+BDFChar: 7879 985622 6 0 6 0 5
+rr/YkMZ*SU
+BDFChar: 7880 989692 6 1 6 0 5
+i:u6OfE;0S
+BDFChar: 7881 984421 6 0 6 -1 8
+!!"_NoW2/>0E;(Q
 BDFRefChar: 1999 1944 0 0 N
 BDFRefChar: 2000 1943 0 0 N
 BDFRefChar: 2001 1941 0 0 N
