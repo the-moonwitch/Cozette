@@ -1076,7 +1076,7 @@ def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_cha
 # large when a font has many glyphs, so it's typically False for testing and
 # True for release.
 
-#	# comment to be included in .flf file
+#	# comment text block to be included in .flf file
 #	with open("figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
 #		flf_comment = f.readlines()
 #	# FIGlet missing character (tofu) glyph in BDF format

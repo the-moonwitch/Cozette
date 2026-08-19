@@ -214,7 +214,7 @@ def variant(
 
 
 def generate_figlet_fonts():
-    # FIGlet comment text
+    # FIGlet comment text block
     with open("cozette_builder/figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
         flf_comment = f.readlines()
     # FIGlet missing character (tofu) glyph in BDF format
@@ -223,8 +223,26 @@ def generate_figlet_fonts():
         "bitmap": [248, 136, 136, 136, 136, 136, 136, 248],
     }
     # Generate FIGlet fonts
-    build_flf2("build/cozette.bdf", "build/cozette.flf", flf_comment, True, 8, True, flf_missing_character, False)
-    build_flf2("build/cozettecrossedseven.bdf", "build/cozettecrossedseven.flf", flf_comment, True, 8, True, flf_missing_character, False)
+    build_flf2(
+        bdfpath="build/cozette.bdf",
+        flfpath="build/cozette.flf",
+        comment=flf_comment,
+        compressed=True,
+        pixels_per_character=8,
+        fit_horizontal_overhang=True,
+        missing_character=flf_missing_character,
+        include_char_names=False
+    )
+    build_flf2(
+        bdfpath="build/cozettecrossedseven.bdf",
+        flfpath="build/cozettecrossedseven.flf",
+        comment=flf_comment,
+        compressed=True,
+        pixels_per_character=8,
+        fit_horizontal_overhang=True,
+        missing_character=flf_missing_character,
+        include_char_names=False
+    )
 
 
 def gen_versions(bdf_path: Path, font_name: str, filename_prefix: str):
