@@ -11,8 +11,8 @@
 # requested, optionally extending them if required to avoid cropping
 # overhangs, adding a "missing character" (tofu) FIGlet replacement
 # character, ... and then export the font to a FIGlet FLF2 file, converting
-# the processed BDF bitmaps to the requested pseudo-pixels type: half-blocks,
-# quadrants, sextants, or octants.
+# the processed BDF bitmaps to the requested pseudo-pixels type: full-blocks,
+# half-blocks, quadrants, sextants, or octants.
 # This gives us a fully-automated FIGlet companion font generator for bitmap
 # fonts, making it possible to use the same glyphs for the terminal and the
 # titles/banners rendered using FIGlet or compatible utilities.
@@ -61,7 +61,8 @@ from datetime import datetime, timezone   # We use these for timestamping
 #
 # This first part is a Unicode pseudo-pixels / mosaics renderer.
 # We take BDF bitmaps, representing monochromatic bitmaps, and convert them
-# to a FIGlet character. It can use octants, sextants, or quadrants.
+# to a FIGlet character. It can use full-blocks, half-blocks, quadrants,
+# sextants, or octants.
 # To avoid any risk of Python interferring with our Unicode markup, we use
 # bytearrays containing explicit UTF-8 bytes sequences instead of strings.
 # This avoids any risk of Python trying to be smart and fixing our Unicode
@@ -77,6 +78,12 @@ from datetime import datetime, timezone   # We use these for timestamping
 # FIGlet character, including the EOL markers, ready to be written to
 # a .flf file.
 #
+
+
+# Full-blocks used by bmp_to_figchar
+# These are the characters for full-block conversions, characters are UTF‑8 bytes.
+FULLBLOCK_0 = b"\xC2\xA0"      #   NO-BREAK SPACE
+FULLBLOCK_1 = b"\xE2\x96\x88"  # █ FULL BLOCK
 
 
 # Half-blocks lookup table used by bmp_to_figchar
@@ -497,7 +504,7 @@ OCTANT_MAP = (
 def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_per_char, vertical_pixels_per_char):
 	"""
 	Convert a BDF-style bitmap to a FIGlet character UTF-8 bytearray.
-	The pixels_per_character argument can only be 2, 4, 6, or 8.
+	The pixels_per_character argument can only be 1, 2, 4, 6, or 8.
 	The return value are the bytes for the FLF2 character entry.
 	"""
 	# This simply breaks a larger bitmap into mosaic tiles, and converts them into a single UTF-8 bytes sequence in FLF2 format.
@@ -511,7 +518,11 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 			bitspadding = bitspadding - 1
 	for y in range(0, height, vertical_pixels_per_char):
 		for x in range(0, width, horizontal_pixels_per_char):
-			if pixels_per_character == 2:
+			if pixels_per_character == 1:
+				hoffset = bits_per_row - (x+1 + bitspadding)  # the shift needed to align the pixel we need
+				bit = (bmp[y] >> hoffset) & 0b1
+				figchar.extend(FULLBLOCK_1 if bit else FULLBLOCK_0)
+			elif pixels_per_character == 2:
 				hoffset = bits_per_row - (x+1 + bitspadding)  # the shift needed to align the pixel we need
 				chrbmp = [0, 0]
 				if y < clines:
@@ -1017,11 +1028,11 @@ def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_cha
 	print("BDF to pseudo-pixels/mosaics FIGlet export script by Philippe Majerus")
 
 	# Validate pseudo-pixels type requested
-	if (pixels_per_character!=2) and (pixels_per_character!=4) and (pixels_per_character!=6) and (pixels_per_character!=8):
-		raise ValueError(f"pixels_per_character must be 2, 4, 6, or 8, not {pixels_per_character}.")
+	if (pixels_per_character!=1) and (pixels_per_character!=2) and (pixels_per_character!=4) and (pixels_per_character!=6) and (pixels_per_character!=8):
+		raise ValueError(f"pixels_per_character must be 1, 2, 4, 6, or 8, not {pixels_per_character}.")
 	# Compute FLF2 characters dimensions
-	vertical_pixels_per_char = 2 if pixels_per_character == 2 else pixels_per_character//2
-	horizontal_pixels_per_char = 1 if pixels_per_character == 2 else 2
+	vertical_pixels_per_char = pixels_per_character if pixels_per_character <= 2 else pixels_per_character//2
+	horizontal_pixels_per_char = 1 if pixels_per_character <= 2 else 2
 
 	print("Parsing BDF file "+ bdfpath +"...")
 
@@ -1065,13 +1076,12 @@ def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_cha
 # large when a font has many glyphs, so it's typically False for testing and
 # True for release.
 
-#   # comment to be included in .flf file
+#	# comment to be included in .flf file
 #	with open("figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
-#   	flf_comment = f.readlines()
+#		flf_comment = f.readlines()
 #	# FIGlet missing character (tofu) glyph in BDF format
 #	flf_missing_character = {
 #		"bbx": (5, 8, 1, 0), "dwidth": 6,
 #		"bitmap": [248, 136, 136, 136, 136, 136, 136, 248]
 #	}
 #	build_flf2("myfont.bdf", "myfont.flf", flf_comment, False, 8, True, flf_missing_character, False)
-
