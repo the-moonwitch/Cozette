@@ -223,8 +223,8 @@ def generate_figlet_fonts():
         "bitmap": [248, 136, 136, 136, 136, 136, 136, 248],
     }
     # Generate FIGlet fonts
-    build_flf2("build/cozette.bdf", "build/cozette.flf", flf_comment, False, 8, True, flf_missing_character, False)
-    build_flf2("build/cozettecrossedseven.bdf", "build/cozettecrossedseven.flf", flf_comment, False, 8, True, flf_missing_character, False)
+    build_flf2("build/cozette.bdf", "build/cozette.flf", flf_comment, True, 8, True, flf_missing_character, False)
+    build_flf2("build/cozettecrossedseven.bdf", "build/cozettecrossedseven.flf", flf_comment, True, 8, True, flf_missing_character, False)
 
 
 def gen_versions(bdf_path: Path, font_name: str, filename_prefix: str):
