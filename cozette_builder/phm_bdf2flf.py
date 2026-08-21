@@ -23,7 +23,7 @@
 # formats as possible, which explains the really weird bitmap format
 # inherited from the BDF format.  Hopefully it is still understandable.
 # 
-# - Philippe Majerus, August 2026  -  Last updated on August 20, 2026
+# - Philippe Majerus, August 2026  -  Last updated on August 21, 2026
 # 
 # 
 # ---------------------------------------------------------------------------
@@ -510,8 +510,6 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 	# This simply breaks a larger bitmap into mosaic tiles, and converts them into a single UTF-8 bytes sequence in FLF2 format.
 	figchar = bytearray()
 	clines = len(bmp)
-	bits_per_row = ((width + 7) // 8) * 8  # This is the stride of each pixels row
-	bitspadding = bits_per_row - width  # This is the padding of unused bits on the right
 	if horizontal_pixels_per_char > 1:
 		# Adjust for uneven width by considering the bitmap had one extra column on the right
 		if (width % 2) != 0:
@@ -519,11 +517,11 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 	for y in range(0, height, vertical_pixels_per_char):
 		for x in range(0, width, horizontal_pixels_per_char):
 			if pixels_per_character == 1:
-				hoffset = bits_per_row - (x+1 + bitspadding)  # the shift needed to align the pixel we need
+				hoffset = width - (x+1)  # the shift needed to align the pixel we need
 				bit = (bmp[y] >> hoffset) & 0b1
 				figchar.extend(FULLBLOCK_1 if bit else FULLBLOCK_0)
 			elif pixels_per_character == 2:
-				hoffset = bits_per_row - (x+1 + bitspadding)  # the shift needed to align the pixel we need
+				hoffset = width - (x+1)  # the shift needed to align the pixel we need
 				chrbmp = [0, 0]
 				if y < clines:
 					chrbmp[0] = (bmp[y] >> hoffset) & 0b1
@@ -532,7 +530,7 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 				bits = (chrbmp[0]) | (chrbmp[1] << 1)
 				figchar.extend(HALFBLOCK_MAP[bits])
 			else:
-				hoffset = bits_per_row - (x+2 + bitspadding)  # the shift needed to align the two pixels we need
+				hoffset = width - (x+2)  # the shift needed to align the two pixels we need
 				chrbmp = [0, 0, 0, 0] # max height is 4 for octants, others ignore extra lines
 				if y < clines:
 					chrbmp[0] = (bmp[y] >> hoffset) & 0b11
@@ -702,173 +700,126 @@ def remove_control_characters(font):
 # so the bitmaps are all using the same canvas and take care of things such
 # as overhang if requested, extending the bitmaps as needed.
 # It also prepared the bitmaps to fit the requirements of the requested
-# mosaics export, forcing them into multiples of 1x2, 2x2, 2x3, or 2x4.
+# mosaics export, forcing them into multiples of 1x1, 1x2, 2x2, 2x3, or 2x4.
 # 
-
 
 def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char, vertical_pixels_per_char):
 	"""
 	Normalize BDF bitmaps into a fixed FIGlet-compatible canvas,
-	preserving baseline alignment and applying optional overhang-aware horizontal expansion.
+	preserving baseline alignment and applying optional overhang-aware
+	horizontal expansion.
 	"""
+
 	font_bbox = font["font_bbox"]
 	font_w, font_h, font_xoff, font_yoff = font_bbox
 	font_height = font["font_height"]
 
-	# We need to keep track of the widest character the font contains,
-	# this will be needed to write optimized FLF2 headers.
-	global_max_width = 0 
+	# We keep a maximum width of the whole font because we need this for the FLF2 header
+	global_max_width = 0
 
-	# Precalculate target canvas height, must be a multiple of the
-	# number of pixels fitting vertically in a character.
-	target_height = (font_height + (vertical_pixels_per_char-1)) // vertical_pixels_per_char * vertical_pixels_per_char
+	# Target canvas height
+	target_height = (font_height + (vertical_pixels_per_char - 1)) // vertical_pixels_per_char * vertical_pixels_per_char
 
-	# #######################################################################
-	# Vertical centering and padding
-	# 
-	# BDF bitmaps are aligned on the font baseline. We need to compute
-	# the offset of the baseline in our target canvas to center the glyphs.
-	#
-
-	# 1. Compute the number of pixels above and below the baseline in the BDF height
-	global_ascent = font_h + font_yoff
+	# Baseline mapping
+	global_ascent  = font_h + font_yoff
 	global_descent = -font_yoff
-
-	# 2. Compute equivalent number of pixels above and below the baseline in the
-	# FLF2 canvas height.
-	target_ascent = (target_height * global_ascent) // font_h
+	
+	target_ascent  = (target_height * global_ascent) // font_h
 	target_descent = target_height - target_ascent
-	
-	# 3. Calculate the bottom padding needed to vertically center the original glyphs
-	# in the target FLF2 canvas.
-	padding_bottom = max(0, target_descent - global_descent)
-	
 
-	# Now we can inspect each bitmap and bake-in their position and the padding to
-	# make them fit the target canvas.
+	padding_bottom = max(0, target_descent - global_descent)
+
 	for cp, glyph in font["glyphs"].items():
-		bbx = glyph["bbx"]
+		bbx_width, bbx_height, xoff, yoff = glyph["bbx"]
 		dwidth = glyph["dwidth"]
-		bbx_width, bbx_height, xoff, yoff = bbx
 		source_bitmap = glyph["bitmap"]
 
-		# Calculate BDF trailing byte alignment padding
-		bits_per_row = ((bbx_width + 7) // 8) * 8  # This is the stride of each pixels row
+		bits_per_row = ((bbx_width + 7) // 8) * 8 # This is the stride of each pixels row
+		bitspadding  = bits_per_row - (bbx_width + xoff) # This is the padding of unused bits on the right
 
-		#####################################################################
-		# Step 1: Compute the leftmost and rightmost drawn pixels
-		#         (non‑zero bits) in visual coordinates.
-		#
-		min_x = 99999
-		max_x = -99999
-		decoded_rows = []
+		if fit_horizontal_overhang:
+			# Original window for the bitmap as designed with its designed bounding box.
+			# This is the bounding box we need to keep at a minimum even if it could be tighter.
+			orig_min_x = -xoff
+			orig_max_x = dwidth - 1 - xoff
 
-		for row_int in source_bitmap:
-			val = row_int >> (bits_per_row - bbx_width)
-			decoded_rows.append(val)
+			# We start with the window already reaching at least those borders
+			min_x = orig_min_x
+			max_x = orig_max_x
 
-			row_bit_len = val.bit_length()
-			global_row_left = xoff + (bbx_width - row_bit_len)
-			global_row_right = xoff + row_bit_len - 1
-			if global_row_left < min_x:
-				min_x = global_row_left
-			if global_row_right > max_x:
-				max_x = global_row_right
+			for row_int in source_bitmap:
+				# Guard against rows with no pixels, as the following code cannot handle those
+				if row_int == 0:
+					continue
+				
+				# Find positions of first and last pixels in full stride
+				left_idx = bits_per_row - row_int.bit_length()
+				right_idx = bits_per_row - ((row_int & -row_int).bit_length())
+				
+				# Keep the furthest values
+				min_x = min(min_x, left_idx)
+				max_x = max(max_x, right_idx)
 
-		#####################################################################
-		# Step 2: Horizontal extends and target width
-		#
-		
-		# Ideal width is the advance-width of the glyph rounded up to a
-		# multiple of the number of pixels fitting horizontally in a character.
-		target_width = (dwidth + (horizontal_pixels_per_char-1)) // horizontal_pixels_per_char * horizontal_pixels_per_char
-		
-		# If we are trying to fit overhangs by extending glyphs instead
-		# of cropping pixels outside the strict glyph bounding box,
-		# we need to investigate how far the furthest pixels extend
-		# left and right of the bounding box, adjust the width of the
-		# target glyph, and horizontally center the glyph in the new
-		# target width.
-		if fit_horizontal_overhang:			
-			# Compute extend of overhang pixels
-			extend_left = max(0, -min_x)
-			extend_right = max(0, max_x - (target_width - 1))
+			# Compute extensions relative to original window
+			extend_left  = max(0, orig_min_x - min_x)
+			extend_right = max(0, max_x - orig_max_x)
 
-			if horizontal_pixels_per_char > 1:
-				# If the overhang on the right was originally getting the glyph
-				# closer to the next glyph on its right, and not on the left,
-				# then when extending by a multiple of 2 it will make it get
-				# closer to the glyph on its left instead of to the glyph on
-				# its right. To keep the original intent of which direction it
-				# was getting closer to, we'll shift it one more pixel to the
-				# right, restoring the visual proximity.
-				if extend_right % 2 == 1 and extend_left % 2 == 0:
-					extend_left+=1
-			
-			# And compute the new target width required to include both
-			# the left and right overhang pixels in the bounding box.
-			new_width = target_width + extend_left + extend_right
-		else:
-			extend_left, new_width = 0, target_width
+			# If no extension is needed, keep xoff/dwidth as designed in font
+			if extend_left > 0 or extend_right > 0:
+				if (horizontal_pixels_per_char > 1) and ((extend_right%2) or (extend_left%2)):
+					# If we have to extend by a multiple of 2 for the target mosaics but
+					# the character only needed extension by 1 pixel, we should tweak
+					# the position to keep the proximity to the surrounding characters
+					# proportional to their original intent. For example if it must be
+					# shifted right by 1px, but we extended by 2px, we should shift by
+					# 2 to keep it closer to the character on its right as originally
+					# designed.
+					xoff += 1
+					extend_right += 1
 
-		#####################################################################
-		# Step 3: Compute vertical baseline placement
-		# 
+				# Adjust dwidth and xoff according to extended window
+				dwidth = dwidth + extend_left + extend_right
+				xoff = xoff + extend_left
+
+		# Horizontal rounding
+		target_width = (dwidth + (horizontal_pixels_per_char - 1)) // horizontal_pixels_per_char * horizontal_pixels_per_char
+
+		# Vertical placement
 		top_row = target_height - (yoff + bbx_height) + font_yoff - padding_bottom
-
-		# Instantiate a completely blank canvas
 		target_bitmap = [0] * target_height
 
-		#####################################################################
-		# Step 4: Map Visual Coordinates with Precise Bitwise Shifts
-		#
+
+		# Bake bitmap into canvas with our new window
+		# We must shift all rows by the xoff horizontal offset,
+		# and righ-align the bitmap.
+		cshift = bits_per_row - (target_width - xoff)
+
 		for i in range(bbx_height):
-			val = decoded_rows[i]
-			if val == 0:
+			row_int = source_bitmap[i]
+			if row_int == 0:
 				continue
 
-			# Calculate the literal target row index for this pixel line
 			canvas_y = top_row + i
-
-			# Avoid Python's lists rollover that would make any pixel
-			# outside of the bouding box vertically reappear on the
-			# other side.
 			if not (0 <= canvas_y < target_height):
 				continue
 
-			# Compute the horizontal shift required to place the glyph inside
-			# the expanded target width while preserving overhang alignment.
-			shift_amount = new_width - bbx_width - xoff - extend_left
-			if shift_amount > 0:
-				val <<= shift_amount
-			elif shift_amount < 0:
-				val >>= (-shift_amount)
-			
-			# Crop any pixel outside the target canvas width
-			val &= (1 << new_width) - 1
-			
-			# Write the new line value to the target bitmap
-			target_bitmap[canvas_y] = val
-		
-		#####################################################################
-		# Step 5: Store the normalized bitmap and width into the font object
-		# 
-		# The bitmap is now always adjusted to the target canvas,
-		# we need the adjusted advance-width, and we don't need the
-		# bounding box anymore.
+			# Shift horizontally according to xoff horizontal offset
+			if cshift > 0:
+				row_int >>= cshift
+			elif cshift < 0:
+				row_int <<= -cshift
+
+			# Store shifted row in bitmap
+			target_bitmap[canvas_y] = row_int
+
 		glyph["bitmap"] = target_bitmap
-		glyph["dwidth"] = new_width
-		del glyph["bbx"] 
+		glyph["dwidth"] = target_width
+		del glyph["bbx"]
 
-		# Update widest character width if needed
-		global_max_width = max(global_max_width, new_width)
+		global_max_width = max(global_max_width, target_width)
 
-	# Store the widest character width in our font object, we'll need that in
-	# the FLF2 header.
 	font["max_width"] = global_max_width
-
-	# Also store the FLF2 baseline
-	font["flf2_baseline"] = (target_ascent + vertical_pixels_per_char//2) // vertical_pixels_per_char
+	font["flf2_baseline"] = (target_ascent + vertical_pixels_per_char // 2) // vertical_pixels_per_char
 
 
 ############################################################################
