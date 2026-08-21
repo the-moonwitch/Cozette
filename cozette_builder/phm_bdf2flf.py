@@ -80,10 +80,11 @@ from datetime import datetime, timezone   # We use these for timestamping
 #
 
 
-# Full-blocks used by bmp_to_figchar
-# These are the characters for full-block conversions, characters are UTF‑8 bytes.
-FULLBLOCK_0 = b"\xC2\xA0"      #   NO-BREAK SPACE
-FULLBLOCK_1 = b"\xE2\x96\x88"  # █ FULL BLOCK
+# Full-blocks lookup table used by bmp_to_figchar
+FULLBLOCK_MAP = (
+	b"\xC2\xA0",          #   NO-BREAK SPACE
+	b"\xE2\x96\x88"       # █ FULL BLOCK
+)
 
 
 # Half-blocks lookup table used by bmp_to_figchar
@@ -510,16 +511,12 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 	# This simply breaks a larger bitmap into mosaic tiles, and converts them into a single UTF-8 bytes sequence in FLF2 format.
 	figchar = bytearray()
 	clines = len(bmp)
-	if horizontal_pixels_per_char > 1:
-		# Adjust for uneven width by considering the bitmap had one extra column on the right
-		if (width % 2) != 0:
-			bitspadding = bitspadding - 1
 	for y in range(0, height, vertical_pixels_per_char):
 		for x in range(0, width, horizontal_pixels_per_char):
 			if pixels_per_character == 1:
 				hoffset = width - (x+1)  # the shift needed to align the pixel we need
 				bit = (bmp[y] >> hoffset) & 0b1
-				figchar.extend(FULLBLOCK_1 if bit else FULLBLOCK_0)
+				figchar.extend(FULLBLOCK_MAP[bit])
 			elif pixels_per_character == 2:
 				hoffset = width - (x+1)  # the shift needed to align the pixel we need
 				chrbmp = [0, 0]
@@ -735,7 +732,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 		source_bitmap = glyph["bitmap"]
 
 		bits_per_row = ((bbx_width + 7) // 8) * 8 # This is the stride of each pixels row
-		bitspadding  = bits_per_row - (bbx_width + xoff) # This is the padding of unused bits on the right
+		#bitspadding = bits_per_row - (bbx_width + xoff) # This is the padding of unused bits on the right
 
 		if fit_horizontal_overhang:
 			# Original window for the bitmap as designed with its designed bounding box.
@@ -913,7 +910,7 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 		for cp in range(32, 127):
 			glyph = glyphs.get(cp)
 			if glyph is None:
-				raise ValueError(f"Missing required character {cp}.")
+				raise ValueError(f"Missing required character U+{cp:04X}.")
 			else:
 				f.write(bmp_to_figchar(glyph["bitmap"], glyph_height*vertical_pixels_per_char, glyph["dwidth"], pixels_per_character, horizontal_pixels_per_char, vertical_pixels_per_char))
 				# Remove from map so extras won't include it
@@ -923,7 +920,7 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 		for cp in (0x00C4, 0x00D6, 0x00DC, 0x00E4, 0x00F6, 0x00FC, 0x00DF):
 			glyph = glyphs.get(cp)
 			if glyph is None:
-				raise ValueError(f"Missing required character {cp}.")
+				raise ValueError(f"Missing required character U+{cp:04X}.")
 			else:
 				f.write(bmp_to_figchar(glyph["bitmap"], glyph_height*vertical_pixels_per_char, glyph["dwidth"], pixels_per_character, horizontal_pixels_per_char, vertical_pixels_per_char))
 				# Remove from map so extras won't include it
