@@ -24,6 +24,8 @@ from cozette_builder.scanner import (
     print_codepoints_for_changelog,
     scan_for_codepoints,
 )
+from cozette_builder.phm_bdf2flf import build_flf2
+
 
 REPO_ROOT = Path(__file__).resolve().parent
 BUILD_DIR = REPO_ROOT / "build"
@@ -211,6 +213,38 @@ def variant(
     return (outpath, variant_name)
 
 
+def generate_figlet_fonts():
+    # FIGlet comment text block
+    with open("cozette_builder/figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
+        flf_comment = f.readlines()
+    # FIGlet missing character (tofu) glyph in BDF format
+    flf_missing_character = {
+        "bbx": (5, 8, 1, 0), "dwidth": 6,
+        "bitmap": [248, 136, 136, 136, 136, 136, 136, 248],
+    }
+    # Generate FIGlet fonts
+    build_flf2(
+        bdfpath="build/cozette.bdf",
+        flfpath="build/cozette.flf",
+        comment=flf_comment,
+        compressed=True,
+        pixels_per_character=8,
+        fit_horizontal_overhang=True,
+        missing_character=flf_missing_character,
+        include_char_names=False
+    )
+    build_flf2(
+        bdfpath="build/cozettecrossedseven.bdf",
+        flfpath="build/cozettecrossedseven.flf",
+        comment=flf_comment,
+        compressed=True,
+        pixels_per_character=8,
+        fit_horizontal_overhang=True,
+        missing_character=flf_missing_character,
+        include_char_names=False
+    )
+
+
 def gen_versions(bdf_path: Path, font_name: str, filename_prefix: str):
     hidpi_path = BUILD_DIR / f"{filename_prefix}_hidpi.bdf"
 
@@ -329,6 +363,7 @@ if __name__ == "__main__":
             print(crayons.blue(f"Building versions for {font_name}..."))
             gen_versions(bdf_path, font_name, font_name.lower())
         print(crayons.green("Done!", bold=True))
+        generate_figlet_fonts()
     elif args.action == "changelog":
         get_changelog()
     else:
