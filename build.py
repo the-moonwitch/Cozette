@@ -24,7 +24,7 @@ from cozette_builder.scanner import (
     print_codepoints_for_changelog,
     scan_for_codepoints,
 )
-from cozette_builder.phm_bdf2flf import build_flf2
+from cozette_builder.phm_bdf2flf import build_flf2, PixelsPerCharacter
 
 
 REPO_ROOT = Path(__file__).resolve().parent
@@ -228,7 +228,7 @@ def generate_figlet_fonts():
         flfpath="build/cozette.flf",
         comment=flf_comment,
         compressed=True,
-        pixels_per_character=8,
+        pixels_per_character=PixelsPerCharacter.OCTANTS,
         fit_horizontal_overhang=True,
         missing_character=flf_missing_character,
         include_char_names=False
@@ -238,7 +238,7 @@ def generate_figlet_fonts():
         flfpath="build/cozettecrossedseven.flf",
         comment=flf_comment,
         compressed=True,
-        pixels_per_character=8,
+        pixels_per_character=PixelsPerCharacter.OCTANTS,
         fit_horizontal_overhang=True,
         missing_character=flf_missing_character,
         include_char_names=False

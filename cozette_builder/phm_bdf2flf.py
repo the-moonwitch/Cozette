@@ -12,7 +12,8 @@
 # overhangs, adding a "missing character" (tofu) FIGlet replacement
 # character, ... and then export the font to a FIGlet FLF2 file, converting
 # the processed BDF bitmaps to the requested pseudo-pixels type: full-blocks,
-# half-blocks, quadrants, sextants, or octants.
+# half-blocks, quadrants, sextants, octants, separated quadrants, separated
+# sextants, or Braille.
 # This gives us a fully-automated FIGlet companion font generator for bitmap
 # fonts, making it possible to use the same glyphs for the terminal and the
 # titles/banners rendered using FIGlet or compatible utilities.
@@ -23,7 +24,7 @@
 # formats as possible, which explains the really weird bitmap format
 # inherited from the BDF format.  Hopefully it is still understandable.
 # 
-# - Philippe Majerus, August 2026  -  Last updated on August 21, 2026
+# - Philippe Majerus, August 2026  -  Last updated on August 23, 2026
 # 
 # 
 # ---------------------------------------------------------------------------
@@ -51,6 +52,7 @@
 # ---------------------------------------------------------------------------
 
 
+from enum import IntEnum  # We use this to provide names for the density arg.
 import copy  # We need copy.deepcopy in build_flf2
 import zipfile, os, tempfile, shutil   # We use these for zip_in_place
 from datetime import datetime, timezone   # We use these for timestamping
@@ -66,7 +68,7 @@ from datetime import datetime, timezone   # We use these for timestamping
 # To avoid any risk of Python interferring with our Unicode markup, we use
 # bytearrays containing explicit UTF-8 bytes sequences instead of strings.
 # This avoids any risk of Python trying to be smart and fixing our Unicode
-# 17.0 characters it doesn't know to something outdated it considers more
+# 16.0 characters it doesn't know to something outdated it considers more
 # valid.
 # 
 # The whole section provides a single function, bmp_to_figchar(bmp, height,
@@ -134,6 +136,25 @@ QUADRANT_MAP  = (
 	b"\xE2\x96\x88"       # █ FULL BLOCK
 )
 
+# Same as above, but using the "separated" variants
+SEPARATED_QUADRANT_MAP = (
+    b"\xC2\xA0",          #   NO-BREAK SPACE
+    b"\xF0\x9C\xB0\xA2",  # 𜰢 SEPARATED BLOCK QUADRANT-2
+    b"\xF0\x9C\xB0\xA1",  # 𜰡 SEPARATED BLOCK QUADRANT-1
+    b"\xF0\x9C\xB0\xA3",  # 𜰣 SEPARATED BLOCK QUADRANT-12
+    b"\xF0\x9C\xB0\xA8",  # 𜰨 SEPARATED BLOCK QUADRANT-4
+    b"\xF0\x9C\xB0\xAA",  # 𜰪 SEPARATED BLOCK QUADRANT-24
+    b"\xF0\x9C\xB0\xA9",  # 𜰩 SEPARATED BLOCK QUADRANT-14
+    b"\xF0\x9C\xB0\xAB",  # 𜰫 SEPARATED BLOCK QUADRANT-124
+    b"\xF0\x9C\xB0\xA4",  # 𜰤 SEPARATED BLOCK QUADRANT-3
+    b"\xF0\x9C\xB0\xA6",  # 𜰦 SEPARATED BLOCK QUADRANT-23
+    b"\xF0\x9C\xB0\xA5",  # 𜰥 SEPARATED BLOCK QUADRANT-13
+    b"\xF0\x9C\xB0\xA7",  # 𜰧 SEPARATED BLOCK QUADRANT-123
+    b"\xF0\x9C\xB0\xAC",  # 𜰬 SEPARATED BLOCK QUADRANT-34
+    b"\xF0\x9C\xB0\xAE",  # 𜰮 SEPARATED BLOCK QUADRANT-234
+    b"\xF0\x9C\xB0\xAD",  # 𜰭 SEPARATED BLOCK QUADRANT-134
+    b"\xF0\x9C\xB0\xAF"   # 𜰯 SEPARATED BLOCK QUADRANT-1234
+)
 
 # Sextants lookup table used by bmp_to_figchar
 SEXTANT_MAP = (
@@ -220,6 +241,73 @@ SEXTANT_MAP = (
 	b"\xE2\x96\x88"       # █ FULL BLOCK
 )
 
+# Same as above, but using the "separated" variants
+SEPARATED_SEXTANT_MAP = (
+    b"\xC2\xA0",          #   NO-BREAK SPACE
+    b"\xF0\x9C\xB9\x92",  # 𜹒 SEPARATED BLOCK SEXTANT-2
+    b"\xF0\x9C\xB9\x91",  # 𜹑 SEPARATED BLOCK SEXTANT-1
+    b"\xF0\x9C\xB9\x93",  # 𜹓 SEPARATED BLOCK SEXTANT-12
+    b"\xF0\x9C\xB9\x98",  # 𜹘 SEPARATED BLOCK SEXTANT-4
+    b"\xF0\x9C\xB9\x9A",  # 𜹚 SEPARATED BLOCK SEXTANT-24
+    b"\xF0\x9C\xB9\x99",  # 𜹙 SEPARATED BLOCK SEXTANT-14
+    b"\xF0\x9C\xB9\x9B",  # 𜹛 SEPARATED BLOCK SEXTANT-124
+    b"\xF0\x9C\xB9\x94",  # 𜹔 SEPARATED BLOCK SEXTANT-3
+    b"\xF0\x9C\xB9\x96",  # 𜹖 SEPARATED BLOCK SEXTANT-23
+    b"\xF0\x9C\xB9\x95",  # 𜹕 SEPARATED BLOCK SEXTANT-13
+    b"\xF0\x9C\xB9\x97",  # 𜹗 SEPARATED BLOCK SEXTANT-123
+    b"\xF0\x9C\xB9\x9C",  # 𜹜 SEPARATED BLOCK SEXTANT-34
+    b"\xF0\x9C\xB9\x9E",  # 𜹞 SEPARATED BLOCK SEXTANT-234
+    b"\xF0\x9C\xB9\x9D",  # 𜹝 SEPARATED BLOCK SEXTANT-134
+    b"\xF0\x9C\xB9\x9F",  # 𜹟 SEPARATED BLOCK SEXTANT-1234
+    b"\xF0\x9C\xB9\xB0",  # 𜹰 SEPARATED BLOCK SEXTANT-6
+    b"\xF0\x9C\xB9\xB2",  # 𜹲 SEPARATED BLOCK SEXTANT-26
+    b"\xF0\x9C\xB9\xB1",  # 𜹱 SEPARATED BLOCK SEXTANT-16
+    b"\xF0\x9C\xB9\xB3",  # 𜹳 SEPARATED BLOCK SEXTANT-126
+    b"\xF0\x9C\xB9\xB8",  # 𜹸 SEPARATED BLOCK SEXTANT-46
+    b"\xF0\x9C\xB9\xBA",  # 𜹺 SEPARATED BLOCK SEXTANT-246
+    b"\xF0\x9C\xB9\xB9",  # 𜹹 SEPARATED BLOCK SEXTANT-146
+    b"\xF0\x9C\xB9\xBB",  # 𜹻 SEPARATED BLOCK SEXTANT-1246
+    b"\xF0\x9C\xB9\xB4",  # 𜹴 SEPARATED BLOCK SEXTANT-36
+    b"\xF0\x9C\xB9\xB6",  # 𜹶 SEPARATED BLOCK SEXTANT-236
+    b"\xF0\x9C\xB9\xB5",  # 𜹵 SEPARATED BLOCK SEXTANT-136
+    b"\xF0\x9C\xB9\xB7",  # 𜹷 SEPARATED BLOCK SEXTANT-1236
+    b"\xF0\x9C\xB9\xBC",  # 𜹼 SEPARATED BLOCK SEXTANT-346
+    b"\xF0\x9C\xB9\xBE",  # 𜹾 SEPARATED BLOCK SEXTANT-2346
+    b"\xF0\x9C\xB9\xBD",  # 𜹽 SEPARATED BLOCK SEXTANT-1346
+    b"\xF0\x9C\xB9\xBF",  # 𜹿 SEPARATED BLOCK SEXTANT-12346
+    b"\xF0\x9C\xB9\xA0",  # 𜹠 SEPARATED BLOCK SEXTANT-5
+    b"\xF0\x9C\xB9\xA2",  # 𜹢 SEPARATED BLOCK SEXTANT-25
+    b"\xF0\x9C\xB9\xA1",  # 𜹡 SEPARATED BLOCK SEXTANT-15
+    b"\xF0\x9C\xB9\xA3",  # 𜹣 SEPARATED BLOCK SEXTANT-125
+    b"\xF0\x9C\xB9\xA8",  # 𜹨 SEPARATED BLOCK SEXTANT-45
+    b"\xF0\x9C\xB9\xAA",  # 𜹪 SEPARATED BLOCK SEXTANT-245
+    b"\xF0\x9C\xB9\xA9",  # 𜹩 SEPARATED BLOCK SEXTANT-145
+    b"\xF0\x9C\xB9\xAB",  # 𜹫 SEPARATED BLOCK SEXTANT-1245
+    b"\xF0\x9C\xB9\xA4",  # 𜹤 SEPARATED BLOCK SEXTANT-35
+    b"\xF0\x9C\xB9\xA6",  # 𜹦 SEPARATED BLOCK SEXTANT-235
+    b"\xF0\x9C\xB9\xA5",  # 𜹥 SEPARATED BLOCK SEXTANT-135
+    b"\xF0\x9C\xB9\xA7",  # 𜹧 SEPARATED BLOCK SEXTANT-1235
+    b"\xF0\x9C\xB9\xAC",  # 𜹬 SEPARATED BLOCK SEXTANT-345
+    b"\xF0\x9C\xB9\xAE",  # 𜹮 SEPARATED BLOCK SEXTANT-2345
+    b"\xF0\x9C\xB9\xAD",  # 𜹭 SEPARATED BLOCK SEXTANT-1345
+    b"\xF0\x9C\xB9\xAF",  # 𜹯 SEPARATED BLOCK SEXTANT-12345
+    b"\xF0\x9C\xBA\x80",  # 𜺀 SEPARATED BLOCK SEXTANT-56
+    b"\xF0\x9C\xBA\x82",  # 𜺂 SEPARATED BLOCK SEXTANT-256
+    b"\xF0\x9C\xBA\x81",  # 𜺁 SEPARATED BLOCK SEXTANT-156
+    b"\xF0\x9C\xBA\x83",  # 𜺃 SEPARATED BLOCK SEXTANT-1256
+    b"\xF0\x9C\xBA\x88",  # 𜺈 SEPARATED BLOCK SEXTANT-456
+    b"\xF0\x9C\xBA\x8A",  # 𜺊 SEPARATED BLOCK SEXTANT-2456
+    b"\xF0\x9C\xBA\x89",  # 𜺉 SEPARATED BLOCK SEXTANT-1456
+    b"\xF0\x9C\xBA\x8B",  # 𜺋 SEPARATED BLOCK SEXTANT-12456
+    b"\xF0\x9C\xBA\x84",  # 𜺄 SEPARATED BLOCK SEXTANT-356
+    b"\xF0\x9C\xBA\x86",  # 𜺆 SEPARATED BLOCK SEXTANT-2356
+    b"\xF0\x9C\xBA\x85",  # 𜺅 SEPARATED BLOCK SEXTANT-1356
+    b"\xF0\x9C\xBA\x87",  # 𜺇 SEPARATED BLOCK SEXTANT-12356
+    b"\xF0\x9C\xBA\x8C",  # 𜺌 SEPARATED BLOCK SEXTANT-3456
+    b"\xF0\x9C\xBA\x8E",  # 𜺎 SEPARATED BLOCK SEXTANT-23456
+    b"\xF0\x9C\xBA\x8D",  # 𜺍 SEPARATED BLOCK SEXTANT-13456
+    b"\xF0\x9C\xBA\x8F"   # 𜺏 SEPARATED BLOCK SEXTANT-123456
+)
 
 # Octants lookup table used by bmp_to_figchar
 OCTANT_MAP = (
@@ -500,6 +588,297 @@ OCTANT_MAP = (
 	b"\xE2\x96\x88"       # █ FULL BLOCK
 )
 
+# Same as above, but using Braille dots
+BRAILLE_MAP = (
+    b"\xE2\xA0\x80",      # ⠀ BRAILLE PATTERN BLANK
+    b"\xE2\xA0\x88",      # ⠈ BRAILLE PATTERN DOTS-4
+    b"\xE2\xA0\x81",      # ⠁ BRAILLE PATTERN DOTS-1
+    b"\xE2\xA0\x89",      # ⠉ BRAILLE PATTERN DOTS-14
+    b"\xE2\xA0\x90",      # ⠐ BRAILLE PATTERN DOTS-5
+    b"\xE2\xA0\x98",      # ⠘ BRAILLE PATTERN DOTS-45
+    b"\xE2\xA0\x91",      # ⠑ BRAILLE PATTERN DOTS-15
+    b"\xE2\xA0\x99",      # ⠙ BRAILLE PATTERN DOTS-145
+    b"\xE2\xA0\x82",      # ⠂ BRAILLE PATTERN DOTS-2
+    b"\xE2\xA0\x8A",      # ⠊ BRAILLE PATTERN DOTS-24
+    b"\xE2\xA0\x83",      # ⠃ BRAILLE PATTERN DOTS-12
+    b"\xE2\xA0\x8B",      # ⠋ BRAILLE PATTERN DOTS-124
+    b"\xE2\xA0\x92",      # ⠒ BRAILLE PATTERN DOTS-25
+    b"\xE2\xA0\x9A",      # ⠚ BRAILLE PATTERN DOTS-245
+    b"\xE2\xA0\x93",      # ⠓ BRAILLE PATTERN DOTS-125
+    b"\xE2\xA0\x9B",      # ⠛ BRAILLE PATTERN DOTS-1245
+    b"\xE2\xA0\xA0",      # ⠠ BRAILLE PATTERN DOTS-6
+    b"\xE2\xA0\xA8",      # ⠨ BRAILLE PATTERN DOTS-46
+    b"\xE2\xA0\xA1",      # ⠡ BRAILLE PATTERN DOTS-16
+    b"\xE2\xA0\xA9",      # ⠩ BRAILLE PATTERN DOTS-146
+    b"\xE2\xA0\xB0",      # ⠰ BRAILLE PATTERN DOTS-56
+    b"\xE2\xA0\xB8",      # ⠸ BRAILLE PATTERN DOTS-456
+    b"\xE2\xA0\xB1",      # ⠱ BRAILLE PATTERN DOTS-156
+    b"\xE2\xA0\xB9",      # ⠹ BRAILLE PATTERN DOTS-1456
+    b"\xE2\xA0\xA2",      # ⠢ BRAILLE PATTERN DOTS-26
+    b"\xE2\xA0\xAA",      # ⠪ BRAILLE PATTERN DOTS-246
+    b"\xE2\xA0\xA3",      # ⠣ BRAILLE PATTERN DOTS-126
+    b"\xE2\xA0\xAB",      # ⠫ BRAILLE PATTERN DOTS-1246
+    b"\xE2\xA0\xB2",      # ⠲ BRAILLE PATTERN DOTS-256
+    b"\xE2\xA0\xBA",      # ⠺ BRAILLE PATTERN DOTS-2456
+    b"\xE2\xA0\xB3",      # ⠳ BRAILLE PATTERN DOTS-1256
+    b"\xE2\xA0\xBB",      # ⠻ BRAILLE PATTERN DOTS-12456
+    b"\xE2\xA0\x84",      # ⠄ BRAILLE PATTERN DOTS-3
+    b"\xE2\xA0\x8C",      # ⠌ BRAILLE PATTERN DOTS-34
+    b"\xE2\xA0\x85",      # ⠅ BRAILLE PATTERN DOTS-13
+    b"\xE2\xA0\x8D",      # ⠍ BRAILLE PATTERN DOTS-134
+    b"\xE2\xA0\x94",      # ⠔ BRAILLE PATTERN DOTS-35
+    b"\xE2\xA0\x9C",      # ⠜ BRAILLE PATTERN DOTS-345
+    b"\xE2\xA0\x95",      # ⠕ BRAILLE PATTERN DOTS-135
+    b"\xE2\xA0\x9D",      # ⠝ BRAILLE PATTERN DOTS-1345
+    b"\xE2\xA0\x86",      # ⠆ BRAILLE PATTERN DOTS-23
+    b"\xE2\xA0\x8E",      # ⠎ BRAILLE PATTERN DOTS-234
+    b"\xE2\xA0\x87",      # ⠇ BRAILLE PATTERN DOTS-123
+    b"\xE2\xA0\x8F",      # ⠏ BRAILLE PATTERN DOTS-1234
+    b"\xE2\xA0\x96",      # ⠖ BRAILLE PATTERN DOTS-235
+    b"\xE2\xA0\x9E",      # ⠞ BRAILLE PATTERN DOTS-2345
+    b"\xE2\xA0\x97",      # ⠗ BRAILLE PATTERN DOTS-1235
+    b"\xE2\xA0\x9F",      # ⠟ BRAILLE PATTERN DOTS-12345
+    b"\xE2\xA0\xA4",      # ⠤ BRAILLE PATTERN DOTS-36
+    b"\xE2\xA0\xAC",      # ⠬ BRAILLE PATTERN DOTS-346
+    b"\xE2\xA0\xA5",      # ⠥ BRAILLE PATTERN DOTS-136
+    b"\xE2\xA0\xAD",      # ⠭ BRAILLE PATTERN DOTS-1346
+    b"\xE2\xA0\xB4",      # ⠴ BRAILLE PATTERN DOTS-356
+    b"\xE2\xA0\xBC",      # ⠼ BRAILLE PATTERN DOTS-3456
+    b"\xE2\xA0\xB5",      # ⠵ BRAILLE PATTERN DOTS-1356
+    b"\xE2\xA0\xBD",      # ⠽ BRAILLE PATTERN DOTS-13456
+    b"\xE2\xA0\xA6",      # ⠦ BRAILLE PATTERN DOTS-236
+    b"\xE2\xA0\xAE",      # ⠮ BRAILLE PATTERN DOTS-2346
+    b"\xE2\xA0\xA7",      # ⠧ BRAILLE PATTERN DOTS-1236
+    b"\xE2\xA0\xAF",      # ⠯ BRAILLE PATTERN DOTS-12346
+    b"\xE2\xA0\xB6",      # ⠶ BRAILLE PATTERN DOTS-2356
+    b"\xE2\xA0\xBE",      # ⠾ BRAILLE PATTERN DOTS-23456
+    b"\xE2\xA0\xB7",      # ⠷ BRAILLE PATTERN DOTS-12356
+    b"\xE2\xA0\xBF",      # ⠿ BRAILLE PATTERN DOTS-123456
+    b"\xE2\xA2\x80",      # ⢀ BRAILLE PATTERN DOTS-8
+    b"\xE2\xA2\x88",      # ⢈ BRAILLE PATTERN DOTS-48
+    b"\xE2\xA2\x81",      # ⢁ BRAILLE PATTERN DOTS-18
+    b"\xE2\xA2\x89",      # ⢉ BRAILLE PATTERN DOTS-148
+    b"\xE2\xA2\x90",      # ⢐ BRAILLE PATTERN DOTS-58
+    b"\xE2\xA2\x98",      # ⢘ BRAILLE PATTERN DOTS-458
+    b"\xE2\xA2\x91",      # ⢑ BRAILLE PATTERN DOTS-158
+    b"\xE2\xA2\x99",      # ⢙ BRAILLE PATTERN DOTS-1458
+    b"\xE2\xA2\x82",      # ⢂ BRAILLE PATTERN DOTS-28
+    b"\xE2\xA2\x8A",      # ⢊ BRAILLE PATTERN DOTS-248
+    b"\xE2\xA2\x83",      # ⢃ BRAILLE PATTERN DOTS-128
+    b"\xE2\xA2\x8B",      # ⢋ BRAILLE PATTERN DOTS-1248
+    b"\xE2\xA2\x92",      # ⢒ BRAILLE PATTERN DOTS-258
+    b"\xE2\xA2\x9A",      # ⢚ BRAILLE PATTERN DOTS-2458
+    b"\xE2\xA2\x93",      # ⢓ BRAILLE PATTERN DOTS-1258
+    b"\xE2\xA2\x9B",      # ⢛ BRAILLE PATTERN DOTS-12458
+    b"\xE2\xA2\xA0",      # ⢠ BRAILLE PATTERN DOTS-68
+    b"\xE2\xA2\xA8",      # ⢨ BRAILLE PATTERN DOTS-468
+    b"\xE2\xA2\xA1",      # ⢡ BRAILLE PATTERN DOTS-168
+    b"\xE2\xA2\xA9",      # ⢩ BRAILLE PATTERN DOTS-1468
+    b"\xE2\xA2\xB0",      # ⢰ BRAILLE PATTERN DOTS-568
+    b"\xE2\xA2\xB8",      # ⢸ BRAILLE PATTERN DOTS-4568
+    b"\xE2\xA2\xB1",      # ⢱ BRAILLE PATTERN DOTS-1568
+    b"\xE2\xA2\xB9",      # ⢹ BRAILLE PATTERN DOTS-14568
+    b"\xE2\xA2\xA2",      # ⢢ BRAILLE PATTERN DOTS-268
+    b"\xE2\xA2\xAA",      # ⢪ BRAILLE PATTERN DOTS-2468
+    b"\xE2\xA2\xA3",      # ⢣ BRAILLE PATTERN DOTS-1268
+    b"\xE2\xA2\xAB",      # ⢫ BRAILLE PATTERN DOTS-12468
+    b"\xE2\xA2\xB2",      # ⢲ BRAILLE PATTERN DOTS-2568
+    b"\xE2\xA2\xBA",      # ⢺ BRAILLE PATTERN DOTS-24568
+    b"\xE2\xA2\xB3",      # ⢳ BRAILLE PATTERN DOTS-12568
+    b"\xE2\xA2\xBB",      # ⢻ BRAILLE PATTERN DOTS-124568
+    b"\xE2\xA2\x84",      # ⢄ BRAILLE PATTERN DOTS-38
+    b"\xE2\xA2\x8C",      # ⢌ BRAILLE PATTERN DOTS-348
+    b"\xE2\xA2\x85",      # ⢅ BRAILLE PATTERN DOTS-138
+    b"\xE2\xA2\x8D",      # ⢍ BRAILLE PATTERN DOTS-1348
+    b"\xE2\xA2\x94",      # ⢔ BRAILLE PATTERN DOTS-358
+    b"\xE2\xA2\x9C",      # ⢜ BRAILLE PATTERN DOTS-3458
+    b"\xE2\xA2\x95",      # ⢕ BRAILLE PATTERN DOTS-1358
+    b"\xE2\xA2\x9D",      # ⢝ BRAILLE PATTERN DOTS-13458
+    b"\xE2\xA2\x86",      # ⢆ BRAILLE PATTERN DOTS-238
+    b"\xE2\xA2\x8E",      # ⢎ BRAILLE PATTERN DOTS-2348
+    b"\xE2\xA2\x87",      # ⢇ BRAILLE PATTERN DOTS-1238
+    b"\xE2\xA2\x8F",      # ⢏ BRAILLE PATTERN DOTS-12348
+    b"\xE2\xA2\x96",      # ⢖ BRAILLE PATTERN DOTS-2358
+    b"\xE2\xA2\x9E",      # ⢞ BRAILLE PATTERN DOTS-23458
+    b"\xE2\xA2\x97",      # ⢗ BRAILLE PATTERN DOTS-12358
+    b"\xE2\xA2\x9F",      # ⢟ BRAILLE PATTERN DOTS-123458
+    b"\xE2\xA2\xA4",      # ⢤ BRAILLE PATTERN DOTS-368
+    b"\xE2\xA2\xAC",      # ⢬ BRAILLE PATTERN DOTS-3468
+    b"\xE2\xA2\xA5",      # ⢥ BRAILLE PATTERN DOTS-1368
+    b"\xE2\xA2\xAD",      # ⢭ BRAILLE PATTERN DOTS-13468
+    b"\xE2\xA2\xB4",      # ⢴ BRAILLE PATTERN DOTS-3568
+    b"\xE2\xA2\xBC",      # ⢼ BRAILLE PATTERN DOTS-34568
+    b"\xE2\xA2\xB5",      # ⢵ BRAILLE PATTERN DOTS-13568
+    b"\xE2\xA2\xBD",      # ⢽ BRAILLE PATTERN DOTS-134568
+    b"\xE2\xA2\xA6",      # ⢦ BRAILLE PATTERN DOTS-2368
+    b"\xE2\xA2\xAE",      # ⢮ BRAILLE PATTERN DOTS-23468
+    b"\xE2\xA2\xA7",      # ⢧ BRAILLE PATTERN DOTS-12368
+    b"\xE2\xA2\xAF",      # ⢯ BRAILLE PATTERN DOTS-123468
+    b"\xE2\xA2\xB6",      # ⢶ BRAILLE PATTERN DOTS-23568
+    b"\xE2\xA2\xBE",      # ⢾ BRAILLE PATTERN DOTS-234568
+    b"\xE2\xA2\xB7",      # ⢷ BRAILLE PATTERN DOTS-123568
+    b"\xE2\xA2\xBF",      # ⢿ BRAILLE PATTERN DOTS-1234568
+    b"\xE2\xA1\x80",      # ⡀ BRAILLE PATTERN DOTS-7
+    b"\xE2\xA1\x88",      # ⡈ BRAILLE PATTERN DOTS-47
+    b"\xE2\xA1\x81",      # ⡁ BRAILLE PATTERN DOTS-17
+    b"\xE2\xA1\x89",      # ⡉ BRAILLE PATTERN DOTS-147
+    b"\xE2\xA1\x90",      # ⡐ BRAILLE PATTERN DOTS-57
+    b"\xE2\xA1\x98",      # ⡘ BRAILLE PATTERN DOTS-457
+    b"\xE2\xA1\x91",      # ⡑ BRAILLE PATTERN DOTS-157
+    b"\xE2\xA1\x99",      # ⡙ BRAILLE PATTERN DOTS-1457
+    b"\xE2\xA1\x82",      # ⡂ BRAILLE PATTERN DOTS-27
+    b"\xE2\xA1\x8A",      # ⡊ BRAILLE PATTERN DOTS-247
+    b"\xE2\xA1\x83",      # ⡃ BRAILLE PATTERN DOTS-127
+    b"\xE2\xA1\x8B",      # ⡋ BRAILLE PATTERN DOTS-1247
+    b"\xE2\xA1\x92",      # ⡒ BRAILLE PATTERN DOTS-257
+    b"\xE2\xA1\x9A",      # ⡚ BRAILLE PATTERN DOTS-2457
+    b"\xE2\xA1\x93",      # ⡓ BRAILLE PATTERN DOTS-1257
+    b"\xE2\xA1\x9B",      # ⡛ BRAILLE PATTERN DOTS-12457
+    b"\xE2\xA1\xA0",      # ⡠ BRAILLE PATTERN DOTS-67
+    b"\xE2\xA1\xA8",      # ⡨ BRAILLE PATTERN DOTS-467
+    b"\xE2\xA1\xA1",      # ⡡ BRAILLE PATTERN DOTS-167
+    b"\xE2\xA1\xA9",      # ⡩ BRAILLE PATTERN DOTS-1467
+    b"\xE2\xA1\xB0",      # ⡰ BRAILLE PATTERN DOTS-567
+    b"\xE2\xA1\xB8",      # ⡸ BRAILLE PATTERN DOTS-4567
+    b"\xE2\xA1\xB1",      # ⡱ BRAILLE PATTERN DOTS-1567
+    b"\xE2\xA1\xB9",      # ⡹ BRAILLE PATTERN DOTS-14567
+    b"\xE2\xA1\xA2",      # ⡢ BRAILLE PATTERN DOTS-267
+    b"\xE2\xA1\xAA",      # ⡪ BRAILLE PATTERN DOTS-2467
+    b"\xE2\xA1\xA3",      # ⡣ BRAILLE PATTERN DOTS-1267
+    b"\xE2\xA1\xAB",      # ⡫ BRAILLE PATTERN DOTS-12467
+    b"\xE2\xA1\xB2",      # ⡲ BRAILLE PATTERN DOTS-2567
+    b"\xE2\xA1\xBA",      # ⡺ BRAILLE PATTERN DOTS-24567
+    b"\xE2\xA1\xB3",      # ⡳ BRAILLE PATTERN DOTS-12567
+    b"\xE2\xA1\xBB",      # ⡻ BRAILLE PATTERN DOTS-124567
+    b"\xE2\xA1\x84",      # ⡄ BRAILLE PATTERN DOTS-37
+    b"\xE2\xA1\x8C",      # ⡌ BRAILLE PATTERN DOTS-347
+    b"\xE2\xA1\x85",      # ⡅ BRAILLE PATTERN DOTS-137
+    b"\xE2\xA1\x8D",      # ⡍ BRAILLE PATTERN DOTS-1347
+    b"\xE2\xA1\x94",      # ⡔ BRAILLE PATTERN DOTS-357
+    b"\xE2\xA1\x9C",      # ⡜ BRAILLE PATTERN DOTS-3457
+    b"\xE2\xA1\x95",      # ⡕ BRAILLE PATTERN DOTS-1357
+    b"\xE2\xA1\x9D",      # ⡝ BRAILLE PATTERN DOTS-13457
+    b"\xE2\xA1\x86",      # ⡆ BRAILLE PATTERN DOTS-237
+    b"\xE2\xA1\x8E",      # ⡎ BRAILLE PATTERN DOTS-2347
+    b"\xE2\xA1\x87",      # ⡇ BRAILLE PATTERN DOTS-1237
+    b"\xE2\xA1\x8F",      # ⡏ BRAILLE PATTERN DOTS-12347
+    b"\xE2\xA1\x96",      # ⡖ BRAILLE PATTERN DOTS-2357
+    b"\xE2\xA1\x9E",      # ⡞ BRAILLE PATTERN DOTS-23457
+    b"\xE2\xA1\x97",      # ⡗ BRAILLE PATTERN DOTS-12357
+    b"\xE2\xA1\x9F",      # ⡟ BRAILLE PATTERN DOTS-123457
+    b"\xE2\xA1\xA4",      # ⡤ BRAILLE PATTERN DOTS-367
+    b"\xE2\xA1\xAC",      # ⡬ BRAILLE PATTERN DOTS-3467
+    b"\xE2\xA1\xA5",      # ⡥ BRAILLE PATTERN DOTS-1367
+    b"\xE2\xA1\xAD",      # ⡭ BRAILLE PATTERN DOTS-13467
+    b"\xE2\xA1\xB4",      # ⡴ BRAILLE PATTERN DOTS-3567
+    b"\xE2\xA1\xBC",      # ⡼ BRAILLE PATTERN DOTS-34567
+    b"\xE2\xA1\xB5",      # ⡵ BRAILLE PATTERN DOTS-13567
+    b"\xE2\xA1\xBD",      # ⡽ BRAILLE PATTERN DOTS-134567
+    b"\xE2\xA1\xA6",      # ⡦ BRAILLE PATTERN DOTS-2367
+    b"\xE2\xA1\xAE",      # ⡮ BRAILLE PATTERN DOTS-23467
+    b"\xE2\xA1\xA7",      # ⡧ BRAILLE PATTERN DOTS-12367
+    b"\xE2\xA1\xAF",      # ⡯ BRAILLE PATTERN DOTS-123467
+    b"\xE2\xA1\xB6",      # ⡶ BRAILLE PATTERN DOTS-23567
+    b"\xE2\xA1\xBE",      # ⡾ BRAILLE PATTERN DOTS-234567
+    b"\xE2\xA1\xB7",      # ⡷ BRAILLE PATTERN DOTS-123567
+    b"\xE2\xA1\xBF",      # ⡿ BRAILLE PATTERN DOTS-1234567
+    b"\xE2\xA3\x80",      # ⣀ BRAILLE PATTERN DOTS-78
+    b"\xE2\xA3\x88",      # ⣈ BRAILLE PATTERN DOTS-478
+    b"\xE2\xA3\x81",      # ⣁ BRAILLE PATTERN DOTS-178
+    b"\xE2\xA3\x89",      # ⣉ BRAILLE PATTERN DOTS-1478
+    b"\xE2\xA3\x90",      # ⣐ BRAILLE PATTERN DOTS-578
+    b"\xE2\xA3\x98",      # ⣘ BRAILLE PATTERN DOTS-4578
+    b"\xE2\xA3\x91",      # ⣑ BRAILLE PATTERN DOTS-1578
+    b"\xE2\xA3\x99",      # ⣙ BRAILLE PATTERN DOTS-14578
+    b"\xE2\xA3\x82",      # ⣂ BRAILLE PATTERN DOTS-278
+    b"\xE2\xA3\x8A",      # ⣊ BRAILLE PATTERN DOTS-2478
+    b"\xE2\xA3\x83",      # ⣃ BRAILLE PATTERN DOTS-1278
+    b"\xE2\xA3\x8B",      # ⣋ BRAILLE PATTERN DOTS-12478
+    b"\xE2\xA3\x92",      # ⣒ BRAILLE PATTERN DOTS-2578
+    b"\xE2\xA3\x9A",      # ⣚ BRAILLE PATTERN DOTS-24578
+    b"\xE2\xA3\x93",      # ⣓ BRAILLE PATTERN DOTS-12578
+    b"\xE2\xA3\x9B",      # ⣛ BRAILLE PATTERN DOTS-124578
+    b"\xE2\xA3\xA0",      # ⣠ BRAILLE PATTERN DOTS-678
+    b"\xE2\xA3\xA8",      # ⣨ BRAILLE PATTERN DOTS-4678
+    b"\xE2\xA3\xA1",      # ⣡ BRAILLE PATTERN DOTS-1678
+    b"\xE2\xA3\xA9",      # ⣩ BRAILLE PATTERN DOTS-14678
+    b"\xE2\xA3\xB0",      # ⣰ BRAILLE PATTERN DOTS-5678
+    b"\xE2\xA3\xB8",      # ⣸ BRAILLE PATTERN DOTS-45678
+    b"\xE2\xA3\xB1",      # ⣱ BRAILLE PATTERN DOTS-15678
+    b"\xE2\xA3\xB9",      # ⣹ BRAILLE PATTERN DOTS-145678
+    b"\xE2\xA3\xA2",      # ⣢ BRAILLE PATTERN DOTS-2678
+    b"\xE2\xA3\xAA",      # ⣪ BRAILLE PATTERN DOTS-24678
+    b"\xE2\xA3\xA3",      # ⣣ BRAILLE PATTERN DOTS-12678
+    b"\xE2\xA3\xAB",      # ⣫ BRAILLE PATTERN DOTS-124678
+    b"\xE2\xA3\xB2",      # ⣲ BRAILLE PATTERN DOTS-25678
+    b"\xE2\xA3\xBA",      # ⣺ BRAILLE PATTERN DOTS-245678
+    b"\xE2\xA3\xB3",      # ⣳ BRAILLE PATTERN DOTS-125678
+    b"\xE2\xA3\xBB",      # ⣻ BRAILLE PATTERN DOTS-1245678
+    b"\xE2\xA3\x84",      # ⣄ BRAILLE PATTERN DOTS-378
+    b"\xE2\xA3\x8C",      # ⣌ BRAILLE PATTERN DOTS-3478
+    b"\xE2\xA3\x85",      # ⣅ BRAILLE PATTERN DOTS-1378
+    b"\xE2\xA3\x8D",      # ⣍ BRAILLE PATTERN DOTS-13478
+    b"\xE2\xA3\x94",      # ⣔ BRAILLE PATTERN DOTS-3578
+    b"\xE2\xA3\x9C",      # ⣜ BRAILLE PATTERN DOTS-34578
+    b"\xE2\xA3\x95",      # ⣕ BRAILLE PATTERN DOTS-13578
+    b"\xE2\xA3\x9D",      # ⣝ BRAILLE PATTERN DOTS-134578
+    b"\xE2\xA3\x86",      # ⣆ BRAILLE PATTERN DOTS-2378
+    b"\xE2\xA3\x8E",      # ⣎ BRAILLE PATTERN DOTS-23478
+    b"\xE2\xA3\x87",      # ⣇ BRAILLE PATTERN DOTS-12378
+    b"\xE2\xA3\x8F",      # ⣏ BRAILLE PATTERN DOTS-123478
+    b"\xE2\xA3\x96",      # ⣖ BRAILLE PATTERN DOTS-23578
+    b"\xE2\xA3\x9E",      # ⣞ BRAILLE PATTERN DOTS-234578
+    b"\xE2\xA3\x97",      # ⣗ BRAILLE PATTERN DOTS-123578
+    b"\xE2\xA3\x9F",      # ⣟ BRAILLE PATTERN DOTS-1234578
+    b"\xE2\xA3\xA4",      # ⣤ BRAILLE PATTERN DOTS-3678
+    b"\xE2\xA3\xAC",      # ⣬ BRAILLE PATTERN DOTS-34678
+    b"\xE2\xA3\xA5",      # ⣥ BRAILLE PATTERN DOTS-13678
+    b"\xE2\xA3\xAD",      # ⣭ BRAILLE PATTERN DOTS-134678
+    b"\xE2\xA3\xB4",      # ⣴ BRAILLE PATTERN DOTS-35678
+    b"\xE2\xA3\xBC",      # ⣼ BRAILLE PATTERN DOTS-345678
+    b"\xE2\xA3\xB5",      # ⣵ BRAILLE PATTERN DOTS-135678
+    b"\xE2\xA3\xBD",      # ⣽ BRAILLE PATTERN DOTS-1345678
+    b"\xE2\xA3\xA6",      # ⣦ BRAILLE PATTERN DOTS-23678
+    b"\xE2\xA3\xAE",      # ⣮ BRAILLE PATTERN DOTS-234678
+    b"\xE2\xA3\xA7",      # ⣧ BRAILLE PATTERN DOTS-123678
+    b"\xE2\xA3\xAF",      # ⣯ BRAILLE PATTERN DOTS-1234678
+    b"\xE2\xA3\xB6",      # ⣶ BRAILLE PATTERN DOTS-235678
+    b"\xE2\xA3\xBE",      # ⣾ BRAILLE PATTERN DOTS-2345678
+    b"\xE2\xA3\xB7",      # ⣷ BRAILLE PATTERN DOTS-1235678
+    b"\xE2\xA3\xBF"       # ⣿ BRAILLE PATTERN DOTS-12345678
+)
+
+
+# This mapping table tells us how many UTF-8 bytes a single character can
+# require for each pseudo-pixels type. This is used to provide the FLF2
+# header with the buffer size it needs to safely store the longest line of
+# its contained FIGlet characters.
+# This is needed because the FLF2 header specifies that size in bytes, not
+# characters, and when using UTF-8, characters can be 1, 2, 3, or 4 bytes.
+MAX_BYTES_PER_CHAR = {
+	1:  3,  # Full-blocks
+	2:  3,  # Half-blocks
+	4:  3,  # Quadrants
+	6:  4,  # Sextants
+	8:  4,  # Octants
+	24: 4,  # Separated Quadrants
+	26: 4,  # Separated Sextants
+	28: 3   # Braille
+}
+
+
+# Helper to find which characters map to use for a specific pixels_per_character type.
+PSEUDOPIXELS_MAPS = {
+    1: FULLBLOCK_MAP,
+    2: HALFBLOCK_MAP,
+    4: QUADRANT_MAP,
+    6: SEXTANT_MAP,
+    8: OCTANT_MAP,
+	24: SEPARATED_QUADRANT_MAP,
+	26: SEPARATED_SEXTANT_MAP,
+	28: BRAILLE_MAP
+}
+
 
 # Our main FIGlet characters renderer function, used by generate_flf2 to convert a normalized BDF bitmap to a FLF2 character
 def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_per_char, vertical_pixels_per_char):
@@ -537,15 +916,10 @@ def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_p
 					chrbmp[2] = (bmp[y+2] >> hoffset) & 0b11
 				if (vertical_pixels_per_char > 3) and (y+3 < clines):
 					chrbmp[3] = (bmp[y+3] >> hoffset) & 0b11
-
+				
 				bits = (chrbmp[0]) | (chrbmp[1] << 2) | (chrbmp[2] << 4) | (chrbmp[3] << 6)
-				match pixels_per_character:
-					case 4: # Quadrants
-						figchar.extend(QUADRANT_MAP[bits])
-					case 6: # Sextants
-						figchar.extend(SEXTANT_MAP[bits])
-					case 8: # Octants
-						figchar.extend(OCTANT_MAP[bits])
+				map = PSEUDOPIXELS_MAPS[pixels_per_character]
+				figchar.extend(map[bits])
 		if y+vertical_pixels_per_char < height:
 			figchar.extend(b"\x40\x0A") # FIGlet EOL @ + newline
 		else:
@@ -878,19 +1252,14 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 		# It must be at last the width of the widest FIGcharacter, plus 2 to accommodate endmarks
 		# We computed the widest bitmap in normalize_bitmaps and stored it in font["max_width"].
 		if horizontal_pixels_per_char == 1:
-			# Half-blocks require up to 3 code units per character
+			# Full-blocks and Half-blocks require up to 3 code units per character
 			# So the following gives us the buffer size required in the worst situation:
-			max_length = font["max_width"] * 3 + 2
-		elif pixels_per_character == 4:
-			# For quadrants, the number of characters required is half the widest bitmap,
-			# and a character can require up to 3 UTF-8 code units.
-			# So the following gives us the buffer size required in the worst situation:
-			max_length = ((font["max_width"] + 1)//2) * 3 + 2
+			max_length = font["max_width"] * MAX_BYTES_PER_CHAR[pixels_per_character] + 2
+			# This is MAX_BYTES_PER_CHAR[1 or 2] but
 		else:
-			# For sextants and octants, the number of characters required is also
-			# half the widest bitmap, but a character can require up to 4 UTF-8 code units.
+			# For all other densities, the number of characters required is half the widest bitmap.
 			# So the following gives us the buffer size required in the worst situation:
-			max_length = ((font["max_width"] + 1)//2) * 4 + 2
+			max_length = ((font["max_width"] + 1)//2) * MAX_BYTES_PER_CHAR[pixels_per_character] + 2
 		# Build header string
 		header = (
 			f"flf2a{hardblank} {height} {baseline} {max_length} "
@@ -962,12 +1331,24 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 #
 
 
+# Provide optional descriptive names for pixels_per_character argument.
+class PixelsPerCharacter(IntEnum):
+	FULLBLOCK = 1            # Requires Unicode 1.1
+	HALFBLOCK = 2            # Requires Unicode 1.1
+	QUADRANTS = 4            # Requires Unicode 3.2
+	SEXTANTS = 6             # Requires Unicode 13.0 Symbols for Legacy Computing block
+	OCTANTS = 8              # Requires Unicode 16.0 Symbols for Legacy Computing Supplement block
+	SEPARATED_QUADANTS = 24  # Requires Unicode 16.0 Symbols for Legacy Computing Supplement block
+	SEPARATED_SEXTANTS = 26  # Requires Unicode 16.0 Symbols for Legacy Computing Supplement block
+	BRAILLE = 28             # Requires Unicode 3.0 Braille block
+
+
 # This is our main conversion function, provide it with the path to BDF file,
 # path of FIGlet file to generate, and whether the .flf should be compressed,
 # and whether horizontal overhang should extend the bitmaps or be cropped.
 # This should be the only function you need to import from this script file
 # to handle the BDF to FIGlet conversion.
-def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_character = 8, fit_horizontal_overhang = True, missing_character = None, include_char_names = False):
+def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_character: PixelsPerCharacter = 8, fit_horizontal_overhang = True, missing_character = None, include_char_names = False):
 	"""
 	DBF to FLF2 conversion utility, takes a BDF and some optional parameters, and creates the corresponding pseudo-pixels-based FIGlet font.
 	See the phm_bdf2flf.py file for more details and usage example.
@@ -976,10 +1357,10 @@ def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_cha
 	print("BDF to pseudo-pixels/mosaics FIGlet export script by Philippe Majerus")
 
 	# Validate pseudo-pixels type requested
-	if (pixels_per_character!=1) and (pixels_per_character!=2) and (pixels_per_character!=4) and (pixels_per_character!=6) and (pixels_per_character!=8):
-		raise ValueError(f"pixels_per_character must be 1, 2, 4, 6, or 8, not {pixels_per_character}.")
+	if pixels_per_character not in [1, 2, 4, 6, 8, 24, 26, 28]:
+		raise ValueError(f"pixels_per_character must be 1, 2, 4, 6, 8, 24, 26, or 28 not {pixels_per_character}.")
 	# Compute FLF2 characters dimensions
-	vertical_pixels_per_char = pixels_per_character if pixels_per_character <= 2 else pixels_per_character//2
+	vertical_pixels_per_char = pixels_per_character if pixels_per_character <= 2 else ((pixels_per_character%20)//2)
 	horizontal_pixels_per_char = 1 if pixels_per_character <= 2 else 2
 
 	print("Parsing BDF file "+ bdfpath +"...")
@@ -1033,3 +1414,5 @@ def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_cha
 #		"bitmap": [248, 136, 136, 136, 136, 136, 136, 248]
 #	}
 #	build_flf2("myfont.bdf", "myfont.flf", flf_comment, False, 8, True, flf_missing_character, False)
+#   # Note the pixels_per_character can also use more descriptive names
+#   # from the PixelsPerCharacter enum.
