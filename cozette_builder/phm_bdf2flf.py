@@ -24,7 +24,7 @@
 # formats as possible, which explains the really weird bitmap format
 # inherited from the BDF format.  Hopefully it is still understandable.
 # 
-# - Philippe Majerus, August 2026  -  Last updated on August 23, 2026
+# - Philippe Majerus, August 2026  -  Last updated on August 30, 2026
 # 
 # 
 # ---------------------------------------------------------------------------
