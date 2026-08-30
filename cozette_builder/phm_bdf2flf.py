@@ -1135,7 +1135,12 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 		source_bitmap = glyph["bitmap"]
 
 		bits_per_row = ((bbx_width + 7) // 8) * 8 # This is the stride of each pixels row
-		#bitspadding = bits_per_row - (bbx_width + xoff) # This is the padding of unused bits on the right
+		bitspadding = bits_per_row - bbx_width # This is the padding of unused bits on the right
+
+		# Some files have bitmap values with garbage after the actual pixels in the unused bits.
+		# So we should trim them to keep only the valid bits.
+		# Compute a mask to AND with the values to discard any garbage bit.
+		bbxmask = ((2**bbx_width) -1) << bitspadding;
 
 		if fit_horizontal_overhang:
 			# Original window for the bitmap as designed with its designed bounding box.
@@ -1148,6 +1153,9 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 			max_x = orig_max_x
 
 			for row_int in source_bitmap:
+				# Discard any garbage bit outside of the bounding box
+				row_int &= bbxmask;
+
 				# Guard against rows with no pixels, as the following code cannot handle those
 				if row_int == 0:
 					continue
@@ -1196,6 +1204,10 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 		
 		for i in range(bbx_height):
 			row_int = source_bitmap[i]
+
+			# Discard any garbage bit outside of the bounding box
+			row_int &= bbxmask;
+
 			if row_int == 0:
 				continue
 
