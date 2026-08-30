@@ -1140,7 +1140,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 		# Some files have bitmap values with garbage after the actual pixels in the unused bits.
 		# So we should trim them to keep only the valid bits.
 		# Compute a mask to AND with the values to discard any garbage bit.
-		bbxmask = ((1 << bbx_width) - 1) << bitspadding;
+		bbxmask = ((1 << bbx_width) - 1) << bitspadding
 		
 		if fit_horizontal_overhang:
 			# Original window for the bitmap as designed with its designed bounding box.
