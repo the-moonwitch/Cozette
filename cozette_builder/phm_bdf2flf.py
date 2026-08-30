@@ -942,11 +942,13 @@ def parse_bdf(path):
 	"""
 
 	font = {
-		"font_height": None,   # global font height
+		"pixel_size": None,   # global font height
 		"glyphs": {}
 	}
 
 	pixel_size = None
+	font_ascent = None
+	font_descent = None
 	font_bbox = None  # (w, h, xoff, yoff)
 
 	with open(path, "r", encoding="utf-8", errors="replace") as f:
@@ -963,6 +965,14 @@ def parse_bdf(path):
 			parts = line.split()
 			pixel_size = int(parts[1])
 
+		elif line.startswith("FONT_ASCENT"):
+			parts = line.split()
+			font_ascent = int(parts[1])
+
+		elif line.startswith("FONT_DESCENT"):
+			parts = line.split()
+			font_descent = int(parts[1])
+
 		# FONTBOUNDINGBOX w h xoff yoff
 		elif line.startswith("FONTBOUNDINGBOX"):
 			parts = line.split()
@@ -970,7 +980,7 @@ def parse_bdf(path):
 			h  = int(parts[2])
 			xo = int(parts[3])
 			yo = int(parts[4])
-			font["font_bbox"] = font_bbox = (w, h, xo, yo)
+			font_bbox = (w, h, xo, yo)
 
 		# STARTCHAR block
 		# This is the beginning of a character section,
@@ -1027,13 +1037,32 @@ def parse_bdf(path):
 	# Decide global font height
 	if pixel_size is not None:
 		# If a pixel-size was found, use that
-		font["font_height"] = pixel_size
+		font["pixel_size"] = pixel_size
+
+		# Some fonts have mismatched pixel_size/font_ascent/font_descent and font_bbox values,
+		# check for that situation and adjust the font_bbox to trust the pixel_size and
+		# explicit ascent and descent instead for our conversions.
+
+		if font_descent is None and font_bbox is not None:
+			font_descent = -font_bbox[3] # use the bounding box y offset as the descent
+		
+		if font_descent is not None:
+			if font_bbox is not None:
+				# Adjust the font bounding box to match explicit dimensions
+				width, height, xoff, yoff = font_bbox
+				font["font_bbox"] = (width, pixel_size, xoff, -font_descent)
+			else:
+				# Create a font bounding box without any mininum width
+				font["font_bbox"] = (0, pixel_size, 0, -font_descent)
+		else:
+			# Fallback if both FONTBOUNDINGBOX and FONT_DESCENT are missing
+			# Create a font bounding box without any minium width and with bottom-valigned
+			font["font_bbox"] = (0, pixel_size, 0, 0)
 	elif font_bbox is not None:
-		# Otherwise, use the font bounding box height
-		# Best-effort fallback: remove baseline offset from total bbox height,
-		# as the overshot must be cropped.
+		# Otherwise, use the font bounding box height as its pixel_size
 		_, height, _, yoff = font_bbox
-		font["font_height"] = height - abs(yoff)
+		font["pixel_size"] = height - abs(yoff)
+		font["font_bbox"] = font_bbox
 	else:
 		raise ValueError("No PIXEL_SIZE or FONTBOUNDINGBOX found in BDF to decide the font height.")
 
@@ -1083,7 +1112,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 
 	font_bbox = font["font_bbox"]
 	font_w, font_h, font_xoff, font_yoff = font_bbox
-	font_height = font["font_height"]
+	font_height = font["pixel_size"]
 
 	# We keep a maximum width of the whole font because we need this for the FLF2 header
 	global_max_width = 0
@@ -1164,7 +1193,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 		# We must shift all rows by the xoff horizontal offset,
 		# and righ-align the bitmap.
 		cshift = bits_per_row - (target_width - xoff)
-
+		
 		for i in range(bbx_height):
 			row_int = source_bitmap[i]
 			if row_int == 0:
@@ -1232,7 +1261,7 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 	glyphs = font["glyphs"]
 
 	# Compute FIGcharacter height in lines from any character
-	glyph_height = (font["font_height"] + (vertical_pixels_per_char-1)) // vertical_pixels_per_char
+	glyph_height = (font["pixel_size"] + (vertical_pixels_per_char-1)) // vertical_pixels_per_char
 
 	# Get number of characters in font
 	glyphs_count = len([cp for cp in glyphs])
