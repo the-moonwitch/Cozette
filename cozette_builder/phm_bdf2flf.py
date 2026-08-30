@@ -1280,15 +1280,16 @@ def generate_flf2(path, font, comment, compressed, include_char_names, pixels_pe
 		# Compute the max_length for this FLF2 file
 		# It must be at last the width of the widest FIGcharacter, plus 2 to accommodate endmarks
 		# We computed the widest bitmap in normalize_bitmaps and stored it in font["max_width"].
-		if horizontal_pixels_per_char == 1:
-			# Full-blocks and Half-blocks require up to 3 code units per character
-			# So the following gives us the buffer size required in the worst situation:
-			max_length = font["max_width"] * MAX_BYTES_PER_CHAR[pixels_per_character] + 2
-			# This is MAX_BYTES_PER_CHAR[1 or 2] but
-		else:
-			# For all other densities, the number of characters required is half the widest bitmap.
-			# So the following gives us the buffer size required in the worst situation:
-			max_length = ((font["max_width"] + 1)//2) * MAX_BYTES_PER_CHAR[pixels_per_character] + 2
+		max_length = (
+			# Number of characters of the longest line
+			# This is the ceil(max_width / horizontal_pixels_per_char)
+			((font["max_width"] + (horizontal_pixels_per_char-1))//horizontal_pixels_per_char)
+			# Max number of bytes per character in UTF-8 encoding
+			* MAX_BYTES_PER_CHAR[pixels_per_character]
+			# Plus FIGlet end-of-line marker "@@"
+			+ 2
+			# FIGlet specs states trailing \n should not be counted
+		)
 		# Build header string
 		header = (
 			f"flf2a{hardblank} {height} {baseline} {max_length} "
