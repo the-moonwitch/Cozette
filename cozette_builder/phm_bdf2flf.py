@@ -1035,6 +1035,9 @@ def parse_bdf(path):
 		i += 1
 
 	# Decide global font height
+	if pixel_size is None and font_descent is not None and font_ascent is not None:
+		# We can deduce the pixel_size from the ascent and descent values
+		pixel_size = (font_descent + font_ascent)
 	if pixel_size is not None:
 		# If a pixel-size was found, use that
 		font["pixel_size"] = pixel_size
