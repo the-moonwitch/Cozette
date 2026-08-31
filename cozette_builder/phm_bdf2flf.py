@@ -1154,7 +1154,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 
 			for row_int in source_bitmap:
 				# Discard any garbage bit outside of the bounding box
-				row_int &= bbxmask;
+				row_int &= bbxmask
 
 				# Guard against rows with no pixels, as the following code cannot handle those
 				if row_int == 0:
@@ -1206,7 +1206,7 @@ def normalize_bitmaps(font, fit_horizontal_overhang, horizontal_pixels_per_char,
 			row_int = source_bitmap[i]
 
 			# Discard any garbage bit outside of the bounding box
-			row_int &= bbxmask;
+			row_int &= bbxmask
 
 			if row_int == 0:
 				continue
