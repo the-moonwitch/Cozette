@@ -6,9 +6,9 @@
 # This Python script is a BDF to FIGlet pseudo-pixels / mosaics converter
 # 
 # It parses a BDF file, grabbing some metadata and bitmaps, and passes the
-# in-memory object built from the BDF though some processing to normalize
-# their bitmaps to regular canvas tailored fo the specific pseudo-pixels type
-# requested, optionally extending them if required to avoid cropping
+# in-memory object built from the BDF through some processing to normalize
+# their bitmaps to regular canvas tailored for the specific pseudo-pixels
+# type requested, optionally extending them if required to avoid cropping
 # overhangs, adding a "missing character" (tofu) FIGlet replacement
 # character, ... and then export the font to a FIGlet FLF2 file, converting
 # the processed BDF bitmaps to the requested pseudo-pixels type: full-blocks,
@@ -65,15 +65,15 @@ from datetime import datetime, timezone   # We use these for timestamping
 # We take BDF bitmaps, representing monochromatic bitmaps, and convert them
 # to a FIGlet character. It can use full-blocks, half-blocks, quadrants,
 # sextants, octants, separated quadrants, separated sextants, or Braille.
-# To avoid any risk of Python interferring with our Unicode markup, we use
+# To avoid any risk of Python interfering with our Unicode markup, we use
 # bytearrays containing explicit UTF-8 bytes sequences instead of strings.
 # This avoids any risk of Python trying to be smart and fixing our Unicode
 # 16.0 characters it doesn't know to something outdated it considers more
 # valid.
 # 
 # The whole section provides a single function, bmp_to_figchar(bmp, height,
-# width, pixels_per_character), where img is a BDF bitmap (a list of
-# horizontal pixels stores as the bits of the numbers stored in the list)
+# width, pixels_per_character), where bmp is a BDF bitmap (a list of
+# horizontal pixels stored as the bits of the numbers stored in the list)
 # The height and width specifies the dimensions of the bitmap, and
 # pixels_per_character can be 2, 4, 6, or 8 to specify the type of
 # characters to use. The returned value is a byte buffer containing the
@@ -884,7 +884,7 @@ PSEUDOPIXELS_MAPS = {
 def bmp_to_figchar(bmp, height, width, pixels_per_character, horizontal_pixels_per_char, vertical_pixels_per_char):
 	"""
 	Convert a BDF-style bitmap to a FIGlet character UTF-8 bytearray.
-	The pixels_per_character argument can only be 1, 2, 4, 6, or 8.
+	The pixels_per_character argument can only be 1, 2, 4, 6, 8, 24, 26, or 28.
 	The return value are the bytes for the FLF2 character entry.
 	"""
 	# This simply breaks a larger bitmap into mosaic tiles, and converts them into a single UTF-8 bytes sequence in FLF2 format.
@@ -1052,11 +1052,11 @@ def parse_bdf(path):
 				width, height, xoff, yoff = font_bbox
 				font["font_bbox"] = (width, pixel_size, xoff, -font_descent)
 			else:
-				# Create a font bounding box without any mininum width
+				# Create a font bounding box without any minimum width
 				font["font_bbox"] = (0, pixel_size, 0, -font_descent)
 		else:
 			# Fallback if both FONTBOUNDINGBOX and FONT_DESCENT are missing
-			# Create a font bounding box without any minium width and with bottom-valigned
+			# Create a font bounding box without any minimum width and with bottom-valigned
 			font["font_bbox"] = (0, pixel_size, 0, 0)
 	elif font_bbox is not None:
 		# Otherwise, use the font bounding box height as its pixel_size
@@ -1099,7 +1099,7 @@ def remove_control_characters(font):
 # The goal is to apply (bake-in) the BBX (bitmap bounding box and offset)
 # so the bitmaps are all using the same canvas and take care of things such
 # as overhang if requested, extending the bitmaps as needed.
-# It also prepared the bitmaps to fit the requirements of the requested
+# It also prepares the bitmaps to fit the requirements of the requested
 # mosaics export, forcing them into multiples of 1x1, 1x2, 2x2, 2x3, or 2x4.
 # 
 
@@ -1392,7 +1392,7 @@ class PixelsPerCharacter(IntEnum):
 # to handle the BDF to FIGlet conversion.
 def build_flf2(bdfpath, flfpath, comment = [], compressed = True, pixels_per_character: PixelsPerCharacter = PixelsPerCharacter.OCTANTS, fit_horizontal_overhang = True, missing_character = None, include_char_names = False):
 	"""
-	DBF to FLF2 conversion utility, takes a BDF and some optional parameters, and creates the corresponding pseudo-pixels-based FIGlet font.
+	BDF to FLF2 conversion utility, takes a BDF and some optional parameters, and creates the corresponding pseudo-pixels-based FIGlet font.
 	See the phm_bdf2flf.py file for more details and usage example.
 	"""
 	print()
