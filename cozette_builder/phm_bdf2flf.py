@@ -31,15 +31,15 @@
 # to generate. This is usually done from another Python file importing this
 # script as a module.
 # 
-# from phm_bdf2flf import build_flf2, PixelsPerCharacter
-# 
+#	from phm_bdf2flf import build_flf2, PixelsPerCharacter
+#	
 #	# comment text block to be included in .flf file, con contain multiple lines
 #	with open("figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
 #		flf_comment = f.read()
 #	
 #	# FIGlet missing character (tofu) glyph in BDF format
 #   # If not provided but font contains a U+FFFD replacement character,
-#   # it will automatically be used instead.
+#	# it will automatically be used instead.
 #	flf_missing_character = {
 #		"bbx": (5, 8, 1, 0), "dwidth": 6,
 #		"bitmap": [248, 136, 136, 136, 136, 136, 136, 248]
@@ -48,9 +48,9 @@
 #	build_flf2("myfont.bdf", "myfont.flf", flf_comment, False, 8, True, flf_missing_character, False)
 #	# Note the pixels_per_character can also use more descriptive names
 #	# from the PixelsPerCharacter enum, such as PixelsPerCharacter.OCTANTS.
-#   # The function returns the number of characters converted.
-#
-#
+#	# The function returns the number of characters converted.
+# 
+# 
 # - Philippe Majerus, August 2026  -  Last updated on September 1, 2026
 # 
 # 
