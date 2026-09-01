@@ -215,8 +215,8 @@ def variant(
 
 def generate_figlet_fonts():
     # FIGlet comment text block
-    with open("cozette_builder/figlet_comment.txt", "r", encoding="utf-8", errors="replace") as f:
-        flf_comment = f.readlines()
+    with open("cozette_builder/figlet_comment.txt", "r", encoding="utf-8") as f:
+        flf_comment = f.read()
     # FIGlet missing character (tofu) glyph in BDF format
     flf_missing_character = {
         "bbx": (5, 8, 1, 0), "dwidth": 6,
