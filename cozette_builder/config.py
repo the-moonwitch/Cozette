@@ -1,0 +1,1 @@
+CHAR_HEIGHT = 13
