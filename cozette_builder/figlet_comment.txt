@@ -2,7 +2,7 @@
 Cozette FIGlet companion font
 =============================
 
-This is a FIGlet version of the Cozette bitmap font using Unicode 17 Octants
+This is a FIGlet version of the Cozette bitmap font using Unicode 16 Octants
 (c) 2020-2026 Samhain <samhain@moonwit.ch> & contributors
   <https://github.com/the-moonwitch/Cozette/contributors>  
 
